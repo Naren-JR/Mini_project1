@@ -1,0 +1,82 @@
+body {
+    background-color:beige;
+    /* Dark blue background */  
+    margin: 0;
+    padding: 0;
+
+}
+    
+
+h1 {
+    background-color: #234C6A; /* Light blue background */
+    color: black; /* White text */
+    padding: 10px 0; /* Some padding */
+    text-align: center; /* Centered text */
+    font-size: 30px; /* Larger font size */
+    font-family: Arial, sans-serif; /* Font family */
+    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    position: sticky; /* Sticky header */
+    top: 0px; /* Stick to the top */
+    z-index: 1000; /* Ensure it stays on top */
+    transition: background-color 0.5s ease; /* Smooth transition for background color */
+}
+
+    h1:hover {
+        background-color: #0F3875; /* Darker blue on hover */
+        color: white; /* Change text color on hover */
+    }   
+    /* Responsive design for smaller screens */
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 24px; /* Slightly smaller font size */
+            padding: 0px 0; /* Adjusted padding */
+        }
+    }
+
+
+h2{
+    text-align: center;
+    margin-top: 20px;
+
+}
+    /* Additional styles for the body to demonstrate the sticky header */
+
+
+
+#navbar p {
+    color: #ccc;
+    margin-bottom: 10px;
+    text-decoration: from-font;
+    padding: 8px ;
+    background-color:cornflowerblue;
+    border-radius: 50px;
+    transition: color 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+}
+
+    #navbar p:hover {
+        color: white;
+        background-color: azure;
+        border-radius: 75px;
+
+        
+    }
+
+
+#navbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 230px;
+    height: 100vh;
+    background: #1B3C53;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.5rem;
+}
