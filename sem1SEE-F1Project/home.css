@@ -1,0 +1,58 @@
+body{
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;  /*Header      Content     Footer*/
+
+    margin: 0px;
+}
+
+header{
+    border-bottom: 2px solid black;
+
+    height: 80px;
+    width: auto;
+
+    grid-row: 1;
+
+    display: inline-flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+}
+
+header img{
+    justify-self: flex-start;
+
+    width: 10%;
+
+}
+
+nav{
+    display: inline-flex;
+
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 50px;
+
+    margin: 0px auto 0px auto;
+}
+
+#main{
+    background-color: grey;
+
+    margin: 10px 50px;
+}
+
+footer{
+    border-top: 2px solid black;
+
+    height: 80px;
+    width: auto;
+
+    grid-row: 3;
+
+    display: inline-flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+}
+
