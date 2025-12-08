@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Visit | F1</title>
+
+    <link rel="stylesheet" href="teams.css" type="text/css">
+</head>
+<body>
+    <header>
+        <img src="https://logos-world.net/wp-content/uploads/2023/12/F1-Logo.png">
+        <nav>
+            <button>Home</button>
+            <button>Teams</button>
+            <button>Drivers</button>
+            <button>Races</button>
+            <button>Visit</button>
+        </nav>
+    </header>
+    <div id="main">
+            <form id="formBox">
+
+            <fieldset>
+                <legend>Personal Details</legend>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Phone Number</label>
+                    <input type="tel" name="contact" id="contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <input type="text" name="gender" id="gender" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dob" id="date" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Visit Details</legend>
+                <div class="form-group">
+                    <label>Program Department</label>
+                    <label class="txt"><input type="checkbox" name="department" value="research"> Research</label>
+                    <label class="txt"><input type="checkbox" name="department" value="development"> Development</label>
+                    <label class="txt"><input type="checkbox" name="department" value="testing"> Testing</label>
+                </div> 
+                <div class="form-group">
+                    <label for="team">Team</label>
+                    <select name="team" id="team">
+                        <option value="Any">No Preference</option>
+                        <option value="McLaren">McLaren</option>
+                        <option value="Ferrari">Ferrari</option>
+                        <option value="Mercedes">Mercedes</option>
+                        <option value="Red Bull Racing">Red Bull Racing</option>
+                        <option value="Williams">Williams</option>
+                        <option value="Racing Bulls">Racing Bulls</option>
+                        <option value="Aston Martin">Aston Martin</option>
+                        <option value="Hass F1 Team">Hass F1 Team</option>
+                        <option value="Kick Sauber">Kick Sauber</option>
+                        <option value="Alpine">Alpine</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" name="date" id="date" min="2025-12-01" max="2025-12-31">
+                </div>
+
+                <div class="form-group">
+                    <label for="visitors">Number of Visitors</label>
+                    <select name="visitors" id="visitors">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tour Duration</label>
+                    <label class="txt"><input type="radio" name="duration" value="halfday"> Half-Day</label>
+                    <label class="txt"><input type="radio" name="duration" value="fullday"> Full-Day</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="req">Special Requests/Comments or Medical Issues</label>
+                    <input type="text" name="req" id="req">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Documents</legend>
+                <div class="form-group">
+                    <label for="myGovID">Upload Valid Identification:</label>
+                    <input type="file" name="myGovID" id="myID" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="orgName">Insitution/Organization Name:</label>
+                    <input type="text" name="orgName" id="orgName">
+                </div>
+                <div class="form-group">
+                    <label for="myClgID">Upload Valid Instituion/Organization ID:</label>
+                    <input type="file" name="myClgID" id="myID" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Important Notes</legend>
+                <ul class="txt">
+                    <li>Carry Valid Government-Issued ID</li>
+                    <li>Wear Closed Shoes and Avoid Loose Clothing.</li>
+                    <li>Photography is allowed only in designated areas.</li>
+                    <li>Visitors must arrive at least 15 minutes before their scheduled time.</li>
+                    <li>Children under 12 are <b>not</b> allowed inside the facility.</li>
+                </ul>
+            </fieldset>
+
+            <fieldset>
+                <legend>Terms and Conditions</legend>
+                <div class="txt" id="TC">
+                    <a href="" class="TClink">F1 Terms and Conditions</a>
+                    <a href="" class="TClink">Respective Facilities and T&Cs</a>
+                </div>
+
+                <div class="form-group   txt">
+                    <label><input type="radio" name="checkNote" required> I have read the above and agree to the same</label>
+                    <label><input type="radio" name="checkF1TC" required> I have read and agree to the Terms and Conditions of F1</label>
+                    <label><input type="radio" name="checkFac" required> I have read and agree to the Terms and Conditions of the Respective Facility</label>
+                </div>
+            </fieldset>
+
+            <input type="submit" value="Submit" id="submit">
+
+        </form>
+    </div>
+    <footer>footer</footer>
+</body>
+</html>
