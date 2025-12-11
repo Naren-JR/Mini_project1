@@ -1,0 +1,174 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.racing-sans-one-regular {
+  font-family: "Racing Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.titillium-web-regular {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    font-size: 16px;
+    font-family: "Racing Sans One";
+    background-color: #15151E;
+    color: white;
+}
+
+.txt{
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid;
+    border-bottom-color: #ff1e00;
+    padding: 0 20px;
+    box-sizing: border-box;
+    width: 100%;; 
+    
+}
+
+header img{
+    justify-self: flex-start;
+
+    width: 10%;
+
+}
+
+nav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: auto;
+    gap: 40px;
+}
+
+
+
+/* Form CSS */
+
+form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    gap: 30px;
+    background-color: rgb(21, 21, 30, 0.6);
+    width: 1000px;
+}
+
+fieldset {
+    width: 90%;
+    border: 2px solid #ff1e00;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+legend {
+    font-size: 25px;
+    font-weight: normal;
+    color: #ff1e00;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label{
+    padding-bottom: 5px;
+}
+
+#date{
+	width: 20%;	
+}
+
+input:not([type="radio"]):not([type="checkbox"]), select {
+    background-color: rgba(255, 30, 0, 0.1);
+    border: 1px solid #ff1e00;
+    border-radius: 5px;
+    padding: 10px 12px;
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input:not([type="radio"]):not([type="checkbox"]):focus, select:focus{
+    background-color: rgba(255, 30, 0, 0.2);
+    border-color: #ff3b1f;
+    box-shadow: 0 0 5px #ff1e00;
+}
+
+input[type="date"] {
+  color-scheme: light;
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+#myID{
+    padding-top: 10px;
+    width:27%;
+}
+
+#TC{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.TClink {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.TClink:hover {
+    color: #ff1e00;
+}
+
+#submit{
+    width: 10%;
+}
+
+footer{
+    margin-top: 30px;
+    border-top: 2px solid;
+    border-top-color: #ff1e00;
+}
+
+footer p{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+option{
+    background-color: #15151E;
+}
