@@ -7,6 +7,7 @@
     <title>Visit | F1</title>
 
     <link rel="stylesheet" href="visit.css" type="text/css">
+    <script src="visit.js" defer></script>
 </head>
 <body>
     <header>
@@ -20,31 +21,31 @@
         </nav>
     </header>
     <div id="main">
-            <form>
+            <form id="formbox" onsubmit="validateForm()">
 
             <fieldset>
                 <legend>Personal Details</legend>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name" required>
+                    <input type="text" name="name" id="name"    >
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" required>
+                    <input type="email" name="email" id="email"    >
                 </div>
 
                 <div class="form-group">
                     <label for="contact">Phone Number</label>
-                    <input type="tel" name="contact" id="contact" required>
+                    <input type="tel" name="contact" id="contact"    >
                 </div>
                 <div class="form-group">
                     <label for="gender">Gender</label>
-                    <input type="text" name="gender" id="gender" required>
+                    <input type="text" name="gender" id="gender"    >
                 </div>
                 <div class="form-group">
                     <label for="dob">Date of Birth</label>
-                    <input type="date" name="dob" id="date" required>
+                    <input type="date" name="dob" id="dob"    >
                 </div>
             </fieldset>
 
@@ -68,14 +69,14 @@
                         <option value="Racing Bulls">Racing Bulls</option>
                         <option value="Aston Martin">Aston Martin</option>
                         <option value="Hass F1 Team">Hass F1 Team</option>
-                        <option value="Kick Sauber">Kick Sauber</option>
+                        <option value="Audi">Audi (Kick Sabuer)</option>
                         <option value="Alpine">Alpine</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="date">Preferred Date</label>
-                    <input type="date" name="date" id="date" min="2025-12-01" max="2025-12-31">
+                    <input type="date" name="date" id="vDate" min="2025-12-01" max="2025-12-31">
                 </div>
 
                 <div class="form-group">
@@ -104,7 +105,7 @@
                 <legend>Documents</legend>
                 <div class="form-group">
                     <label for="myGovID">Upload Valid Identification:</label>
-                    <input type="file" name="myGovID" id="myID" required>
+                    <input type="file" name="myGovID" id="  "    >
                 </div>
                 <br>
                 <div class="form-group">
@@ -113,7 +114,7 @@
                 </div>
                 <div class="form-group">
                     <label for="myClgID">Upload Valid Instituion/Organization ID:</label>
-                    <input type="file" name="myClgID" id="myID" required>
+                    <input type="file" name="myClgID" id="myID"    >
                 </div>
             </fieldset>
 
@@ -136,9 +137,9 @@
                 </div>
 
                 <div class="form-group   txt">
-                    <label><input type="radio" name="checkNote" required> I have read the above and agree to the same</label>
-                    <label><input type="radio" name="checkF1TC" required> I have read and agree to the Terms and Conditions of F1</label>
-                    <label><input type="radio" name="checkFac" required> I have read and agree to the Terms and Conditions of the Respective Facility</label>
+                    <label><input type="radio" name="checkNote"    > I have read the above and agree to the same</label>
+                    <label><input type="radio" name="checkF1TC"    > I have read and agree to the Terms and Conditions of F1</label>
+                    <label><input type="radio" name="checkFac"    > I have read and agree to the Terms and Conditions of the Respective Facility</label>
                 </div>
             </fieldset>
 
