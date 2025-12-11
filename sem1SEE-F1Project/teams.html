@@ -7,6 +7,11 @@
     <title>Teams | F1</title>
 
     <link rel="stylesheet" href="teams.css" type="text/css">
+    <script src="teams.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -21,27 +26,102 @@
     </header>
     <div id="main">
         <div id="row1">
-            <div id="r1c1"></div>
-            <div id="r1c2"></div>
+            <div id="r1c1" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/66/McLaren_Racing_logo.svg/1200px-McLaren_Racing_logo.svg.png">
+                <p class="team-name">McLaren</p>
+                <p class="principal">Team Principal: Andrea Stella</p>
+                <p class="director">Technical Director: Peter Prodromou</p>
+            </div>
+
+            <div id="r1c2" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/d/dc/Scuderia_Ferrari_Logo.svg/1200px-Scuderia_Ferrari_Logo.svg.png">
+                <p class="team-name">Ferrari</p>
+                <p class="principal">Team Principal: Frédéric Vasseur</p>
+                <p class="director">Technical Director: Enrico Cardile</p>
+            </div>
         </div>
         <div id="row2">
-            <div id="r2c1"></div>
-            <div id="r2c2"></div>
+            <div id="r2c1" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Mercedes_AMG_Petronas_F1_Logo.svg/2560px-Mercedes_AMG_Petronas_F1_Logo.svg.png">
+                <p class="team-name">Mercedes</p>
+                <p class="principal">Team Principal: Toto Wolff</p>
+                <p class="director">Technical Director: James Allison</p>
+            </div>
+
+            <div id="r2c2" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0d/Red_Bull_Racing_logo.svg/2560px-Red_Bull_Racing_logo.svg.png">
+                <p class="team-name">Red Bull Racing</p>
+                <p class="principal">Team Principal: Christian Horner</p>
+                <p class="director">Technical Director: Pierre Waché</p>
+            </div>
         </div>
         <div id="row3">
-            <div id="r3c1"></div>
-            <div id="r3c2"></div>
+            <div id="r3c1" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/Aston_Martin_Aramco_F1_Logo.svg/2560px-Aston_Martin_Aramco_F1_Logo.svg.png">
+                <p class="team-name">Aston Martin</p>
+                <p class="principal">Team Principal: Mike Krack</p>
+                <p class="director">Technical Director: Dan Fallows</p>
+            </div>
+
+            <div id="r3c2" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/2/22/Racing_Bulls_Logo.png">
+                <p class="team-name">Visa Cash App RB</p>
+                <p class="principal">Team Principal: Laurent Mekies</p>
+                <p class="director">Technical Director: Jody Egginton</p>
+            </div>
         </div>
         <div id="row4">
-            <div id="r4c1"></div>
-            <div id="r4c2"></div>
+            <div id="r4c1" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/williams/2025williamscarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Williams_Grand_Prix_Engineering_Logo.svg/2560px-Williams_Grand_Prix_Engineering_Logo.svg.png">
+                <p class="team-name">Williams</p>
+                <p class="principal">Team Principal: James Vowles</p>
+                <p class="director">Technical Director: Pat Fry</p>
+            </div>
+
+            <div id="r4c2" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2f/Alpine_F1_Team_Logo.svg/2560px-Alpine_F1_Team_Logo.svg.png">
+                <p class="team-name">Alpine</p>
+                <p class="principal">Team Principal: Bruno Famin</p>
+                <p class="director">Technical Director: Matt Harman</p>
+            </div>
         </div>
         <div id="row5">
-            <div id="r5c1"></div>
-            <div id="r5c2"></div>
+            <div id="r5c1" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/haasf1team/2025haasf1teamcarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Haas_F1_Team_logo.svg/1200px-Haas_F1_Team_logo.svg.png">
+                <p class="team-name">Haas</p>
+                <p class="principal">Team Principal: Ayao Komatsu</p>
+                <p class="director">Technical Director: Andrea De Zordo</p>
+            </div>
+
+            <div id="r5c2" class="team-card">
+                <img class="car" src="https://media.formula1.com/image/upload/c_lfill,h_256/q_auto/f_auto/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Kick_Sauber_F1_Team_Logo.png/1200px-Kick_Sauber_F1_Team_Logo.png">
+                <p class="team-name">Kick Sauber</p>
+                <p class="principal">Team Principal: Alessandro Alunni Bravi</p>
+                <p class="director">Technical Director: James Key</p>
+            </div>
         </div>
 
     </div>
-    <footer>footer</footer>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <h3>F1 Central</h3>
+                <p>Your hub for teams, drivers & race info.</p>
+            </div>
+            <div class="footer-right">
+                <p>© 2025 F1 Project • Made by Praful & Naren</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

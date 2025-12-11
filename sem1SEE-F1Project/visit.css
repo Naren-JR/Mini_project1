@@ -134,6 +134,10 @@ input[type="date"] {
   color-scheme: light;
 }
 
+option{
+    background-color: #15151E;
+}
+
 ul{
     display: flex;
     flex-direction: column;
@@ -174,22 +178,29 @@ ul{
 }
 
 
-
-
-
-
 footer{
-    margin-top: 30px;
-    border-top: 2px solid;
-    border-top-color: #ff1e00;
-}
+    border-top: 2px solid #ff1e00;
+    margin-top: 50px;
 
-footer p{
+    height: 80px;
+    width: 100%;
+
+    grid-row: 3;
+
     display: flex;
-    justify-content: center;
-    margin-top: 10px;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
 }
 
-option{
-    background-color: #15151E;
+.footer-content {
+    flex-wrap: wrap;
+    width: 90%;
+    margin: auto;
+}
+
+.footer-right {
+    text-align: right;
+    font-size: 14px;
 }
