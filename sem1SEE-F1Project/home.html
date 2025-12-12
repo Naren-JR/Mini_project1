@@ -37,7 +37,7 @@
                 <h2>Drivers' Championship</h2>
 
                 <div class="champ-top">
-                    <img src="https://www.motorsport.com/driver/lando-norris/289316/" alt="Lando Norris">
+                    <img src="https://media.formula1.com/image/upload/c_fill,w_720/q_auto/v1740000000/common/f1/2025/mclaren/lannor01/2025mclarenlannor01right.webp" alt="Lando Norris">
                     <div class="champ-meta">
                         <h3>Lando Norris</h3>
                         <p class="team">McLaren • World Champion • 2025</p>
@@ -104,7 +104,7 @@
                         <path d="M20,100 A80,80 0 0,1 180,100" fill="none" stroke="#222" stroke-width="12"/>
                         <g id="ticks"></g>
 
-                        <g transform="translate(100,100)" id="needleGroup">
+                        <g id="needleGroup" transform="translate(100,100)" style="transform-origin: 100px 100px;">
                             <line id="needle" x1="0" y1="0" x2="0" y2="-70"
                                   stroke="url(#needleGrad)" stroke-width="4" stroke-linecap="round"/>
                             <circle cx="0" cy="0" r="5" fill="#ff1e00"/>
@@ -153,6 +153,35 @@
 
             </div>
         </section>
+
+        <!-- ============================== -->
+<!--     DYNAMIC TEAM INFO PANEL    -->
+<!-- ============================== -->
+<div class="team-info-panel">
+
+    <h2>Select a Team for info</h2>
+
+    <div class="team-buttons">
+        <button data-team="redbull">Red Bull</button>
+        <button data-team="mercedes">Mercedes</button>
+        <button data-team="ferrari">Ferrari</button>
+        <button data-team="mclaren">McLaren</button>
+        <button data-team="astonmartin">Aston Martin</button>
+        <button data-team="rb">RB</button>
+        <button data-team="haas">Haas</button>
+        <button data-team="williams">Williams</button>
+        <button data-team="sauber">Kick Sauber</button>
+        <button data-team="alpine">Alpine</button>
+    </div>
+
+    <!-- Dynamic Output -->
+    <div class="team-card" id="teamCard">
+        <h3>Select a team to view details</h3>
+        <p>Drivers, Engine, Car Specs, Team Principal, and more will appear here.</p>
+    </div>
+
+</div>
+
 
         <!-- RIGHT: STATIC BREAKING NEWS -->
         <section class="hub-right">
