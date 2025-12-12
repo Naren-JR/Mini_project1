@@ -96,9 +96,37 @@
             <div class="speedometer-wrap">
 
                 <svg class="speed-arc" viewBox="0 0 200 120">
-                    <path d="M20,100 A80,80 0 0,1 180,100"
-                          fill="none" stroke="#222" stroke-width="12"/>
-                </svg>
+
+    <!-- Background arc (will become gray after sweep) -->
+    <path id="arcBase"
+        d="M20,100 A80,80 0 0,1 180,100"
+        fill="none" stroke="#222" stroke-width="12"/>
+
+    <!-- Red sweep animation -->
+    <path id="arcSweep"
+        d="M20,100 A80,80 0 0,1 180,100"
+        fill="none" stroke="#ff1e00" stroke-width="12"
+        stroke-linecap="round"
+        style="
+            stroke-dasharray:260;
+            stroke-dashoffset:260;
+            opacity:0;
+            filter: drop-shadow(0 0 12px #ff1e00);
+        "/>
+
+    <!-- Speed fill arc -->
+    <path id="arcFill"
+        d="M20,100 A80,80 0 0,1 180,100"
+        fill="none" stroke="white" stroke-width="12"
+        stroke-linecap="round"
+        style="
+            stroke-dasharray:260;
+            stroke-dashoffset:260;
+            opacity:1;
+        "/>
+
+</svg>
+
 
                 <div class="digital-readouts">
                     <div class="speed-digital">
