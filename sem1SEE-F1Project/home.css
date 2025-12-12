@@ -109,3 +109,130 @@ footer{
     font-size: 14px;
 }
 
+/* ===================== */
+/*   F1 HUB LAYOUT       */
+/* ===================== */
+
+.f1-hub {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* LEFT SIDE */
+.champion-block {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid #ff1e00;
+    border-radius: 12px;
+    padding: 15px;
+}
+.champ-top {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.champ-top img {
+    width: 85px;
+    height: 85px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #ff1e00;
+}
+.top-five {
+    list-style: none;
+    padding: 0;
+    margin-top: 12px;
+}
+.top-five li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.07);
+}
+
+/* TELEMETRY */
+.telemetry-panel {
+    background: rgba(0,0,0,0.4);
+    border-radius: 12px;
+    padding: 15px;
+    border: 2px solid #ff1e00;
+    margin-top: 20px;
+}
+.controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.controls select {
+    margin-left: 5px;
+    padding: 4px;
+}
+
+/* SPEEDOMETER */
+.speedometer-wrap {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+.speed-svg {
+    width: 220px;
+    height: 130px;
+}
+.digital-readouts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.speed-digital {
+    font-size: 2rem;
+    color: #ff1e00;
+    font-family: "Racing Sans One";
+}
+
+/* THROTTLE + BUTTONS */
+.throttle input {
+    width: 200px;
+    accent-color: #ff1e00;
+}
+.tele-buttons button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #ff1e00;
+    color: white;
+    cursor: pointer;
+}
+.tele-buttons button[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* STOPWATCH */
+.stopwatch {
+    background: black;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+.sw-digits {
+    font-family: "Racing Sans One";
+    font-size: 1.2rem;
+}
+
+/* RIGHT SIDE - NEWS */
+.news-container {
+    background: rgba(0,0,0,0.4);
+    border: 2px solid #ff1e00;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #ff1e00;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .f1-hub {
+        grid-template-columns: 1fr;
+    }
+}
