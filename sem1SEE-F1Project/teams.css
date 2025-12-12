@@ -77,11 +77,9 @@ a{
 }
 
 #main{
-    background-color: grey;
-
     margin: 10px 50px;
 
-    padding: 50px;
+    padding: 0px 50px 50px 50px;
 
     display: grid;
     grid-template-columns: auto auto;
@@ -141,6 +139,8 @@ a{
     grid-template-rows: auto auto;
 
     margin: 25px;
+
+    align-items: center;
 }
 
 .car{
@@ -152,16 +152,28 @@ a{
     display: grid;
     grid-template-columns: auto auto;
 
-    font-family: til;
+    font-family: "Titillium Web";
 }
 
 .logoNames img{
     width: 245px;
+    justify-self: center;
+    align-self: center;
 }
 
 #ferrari{
     overflow: hidden;
-    transform: translateX(100px);
+    width: 50px;
+}
+
+#racingbull{
+    overflow: hidden;
+    width: 150px;
+}
+
+#williams{
+    overflow: hidden;
+    width: 100px;
 }
 
 footer{
