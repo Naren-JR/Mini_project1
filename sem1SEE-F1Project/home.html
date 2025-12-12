@@ -25,60 +25,76 @@
         </nav>
     </header>
     <div id="main">
-          <!-- HERO BANNER -->
-  <section class="hero-section"> <!-- ADDED -->
-    <div class="hero-content"> <!-- ADDED -->
-      <h1>Welcome to Formula 1 Central</h1> <!-- ADDED -->
-      <div class="hero-buttons"> <!-- ADDED -->
-        <button onclick="location='teams.html'">Teams</button> <!-- ADDED -->
-        <button onclick="location='drivers.html'">Drivers</button> <!-- ADDED -->
-        <button onclick="location='races.html'">Race Schedule</button> <!-- ADDED -->
-      </div>
+          <div id="main">
+
+    <!-- MAIN WRAPPER -->
+    <div class="f1-hub">
+
+        <!-- LEFT: INTERACTIVE DASHBOARD -->
+        <section class="hub-left">
+
+            <h1 class="hub-title">Formula 1 Fan Hub</h1>
+
+            <!-- LIVE SPEED + RPM -->
+            <div class="telemetry-box">
+                <h2>Live Telemetry</h2>
+                <div class="speed-display" id="speedDisplay">0 km/h</div>
+
+                <div class="rpm-circle">
+                    <svg width="160" height="160">
+                        <circle cx="80" cy="80" r="70" stroke="#333" stroke-width="10" fill="none" />
+                        <circle id="rpmArc" cx="80" cy="80" r="70" stroke="#ff1e00" stroke-width="10" stroke-linecap="round" fill="none"
+                                stroke-dasharray="440" stroke-dashoffset="440" />
+                    </svg>
+                </div>
+                <button id="startSim">Start Engine</button>
+            </div>
+
+            <!-- NEXT RACE COUNTDOWN -->
+            <div class="race-countdown">
+                <h2>Next Race: Bahrain GP</h2>
+                <div class="countdown-grid">
+                    <div><span id="d">00</span><p>Days</p></div>
+                    <div><span id="h">00</span><p>Hours</p></div>
+                    <div><span id="m">00</span><p>Minutes</p></div>
+                    <div><span id="s">00</span><p>Seconds</p></div>
+                </div>
+            </div>
+
+            <!-- SEASON STANDINGS -->
+            <div class="standings-box">
+                <h2>Drivers' Championship</h2>
+                <ul>
+                    <li><span>1. Max Verstappen</span> <strong>413 pts</strong></li>
+                    <li><span>2. Charles Leclerc</span> <strong>347 pts</strong></li>
+                    <li><span>3. Lando Norris</span> <strong>331 pts</strong></li>
+                    <li><span>4. Lewis Hamilton</span> <strong>298 pts</strong></li>
+                    <li><span>5. Carlos Sainz</span> <strong>277 pts</strong></li>
+                </ul>
+            </div>
+
+        </section>
+
+        <!-- RIGHT: BREAKING NEWS FEED -->
+        <section class="hub-right">
+            <h2 class="news-title">Breaking News</h2>
+
+            <div class="news-container">
+                <div class="news-scroll" id="newsScroll">
+                    <p>• Ferrari announces major aero upgrade for next race.</p>
+                    <p>• McLaren takes the Constructors’ lead after strong finish.</p>
+                    <p>• FIA releases updated 2025 regulations draft.</p>
+                    <p>• Mercedes confirms new power unit testing breakthrough.</p>
+                    <p>• Red Bull facing wind tunnel time penalty adjustments.</p>
+                    <p>• Aston Martin signs new technical director for 2025.</p>
+                </div>
+            </div>
+        </section>
+
     </div>
-  </section>
 
-  <!-- NEWS STRIP -->
-  <div class="news-ticker"> <!-- ADDED -->
-    <span>
-      Breaking: McLaren takes Constructors Championship lead • Verstappen sets fastest lap • New upgrades announced • Ferrari podium finish ahead…
-    </span>
-  </div>
+</div>
 
-  <!-- QUICK HIGHLIGHTS SECTION -->
-  <section class="highlights"> <!-- ADDED -->
-    <h2>Quick Highlights</h2> <!-- ADDED -->
-    <div class="card-grid"> <!-- ADDED -->
-      <div class="card" onclick="location='teams.html'">
-        <h3>Top Team of the Season</h3>
-        <p>Red Bull Racing leading the title race.</p>
-      </div>
-
-      <div class="card">
-        <h3>Fastest Lap Leader</h3>
-        <p>Max Verstappen — 1:25.840</p>
-      </div>
-
-      <div class="card" onclick="location='races.html'">
-        <h3>Upcoming Race</h3>
-        <p>Bahrain Grand Prix — March 3</p>
-      </div>
-
-      <div class="card">
-        <h3>Car of the Year</h3>
-        <p>Ferrari SF-24 fan favorite.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section class="gallery"> <!-- ADDED -->
-    <h2>Featured Cars</h2> <!-- ADDED -->
-    <div class="gallery-grid"> <!-- ADDED -->
-      <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=80&w=1200" alt="F1 car 1">
-      <img src="https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=1200" alt="F1 car 2">
-      <img src="https://images.unsplash.com/photo-1584545284373-5234a0d4496c?q=80&w=1200" alt="F1 car 3">
-    </div>
-  </section>
     </div>
     <footer>
         <div class="footer-content">
