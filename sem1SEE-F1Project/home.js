@@ -37,7 +37,7 @@ const startBtn = $("#startBtn");
 const stopBtn = $("#stopBtn");
 const resetBtn = $("#resetBtn");
 
-/* STATE */
+/* Engine */
 let speed = 0;
 let rpm = 0;
 let gear = "N";
@@ -46,18 +46,15 @@ let engineRunning = false;
 /* Performance timing */
 let lastFrame = null;
 
-/* MAX SPEED now 400 */
 const MAX_SPEED = 400;
-
-/* Team characteristics */
 const TEAMS = {
     mclaren:  { torque: 1.05, gears: 8 },
-    redbull:  { torque: 1.15, gears: 8 },
+    redbull:  { torque: 3.15, gears: 8 },
     ferrari:  { torque: 1.10, gears: 8 },
     mercedes: { torque: 1.12, gears: 8 }
 };
 
-/* Sound presets */
+/* Sound*/
 const PRESETS = {
     standard: { base: 100, noise: 0.3, q: 6 },
     v8:       { base: 70, noise: 0.6, q: 8 },
@@ -65,14 +62,11 @@ const PRESETS = {
     electric: { base: 260, noise: 0.05, q: 3 }
 };
 
-/* Ramp presets */
 const RAMP = {
     gentle: 0.4,
     normal: 0.8,
     fast:   1.4
 };
-
-/* Timing presets */
 const TIMING = {
     relaxed: 0.6,
     standard: 1.0,
@@ -82,10 +76,7 @@ const TIMING = {
 /* AUDIO ENGINE */
 let audioCtx = null, osc = null, noise = null, noiseGen = null, filter = null, master = null;
 
-/* Special sound bursts */
-/* ===========================================================
-   REALISTIC F1 GEARSHIFT SOUND (EXHAUST + PRESSURE POP)
-   =========================================================== */
+/* Special sound bursts *//
 function playGearshift() {
     if (!audioCtx) return;
 
