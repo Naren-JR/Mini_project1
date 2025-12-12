@@ -237,69 +237,79 @@ footer{
     }
 }
 
-/* ============================ */
-/*       TEAM INFO PANEL        */
-/* ============================ */
+/*           TEAM INFO */
 
 .team-info-panel {
     margin-top: 25px;
-    padding: 15px;
-    background: rgba(255,255,255,0.05);
-    border: 2px solid #ff1e00;
-    border-radius: 12px;
-}
-
-.team-info-panel h2 {
-    margin-bottom: 12px;
-    font-size: 1.6rem;
+    padding: 18px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
 }
 
 .team-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .team-buttons button {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    background: #222;
-    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
     border: 1px solid #444;
-    transition: 0.25s;
-    font-family: "Racing Sans One";
+    background: #111;
+    color: white;
+    cursor: pointer;
+    transition: 0.25s ease;
 }
 
 .team-buttons button:hover {
-    transform: translateY(-3px);
     background: #ff1e00;
+    border-color: #ff1e00;
 }
 
-/* TEAM CARD */
+/* Highlight active button */
+.team-buttons button.active-team {
+    background: #ff1e00 !important;
+    border-color: #ff1e00 !important;
+    color: white !important;
+}
+
 .team-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
     padding: 18px;
     border-radius: 12px;
-    background: rgba(0,0,0,0.4);
-    border: 2px solid #333;
-    transition: background-color 0.5s ease, border-color 0.5s ease;
+    transition: 0.4s ease;
 }
 
 .team-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 5px;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
-.team-card p {
-    margin: 3px 0;
+.team-card .section-title {
+    margin-top: 12px;
+    font-weight: bold;
+    color: #ff1e00;
+    text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
-/* Mobile Friendly */
+.team-card ul {
+    margin: 0;
+    padding-left: 18px;
+    margin-top: 4px;
+}
+
+.team-card ul li {
+    margin-bottom: 4px;
+    color: #ddd;
+}
+
 @media (max-width: 900px) {
     .team-buttons {
         justify-content: center;
     }
 }
-
