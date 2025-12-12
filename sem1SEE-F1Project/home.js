@@ -1,21 +1,21 @@
+/* ===============================
+   NAVBAR HIGHLIGHT
+   =============================== */
 let links = document.querySelectorAll("nav button");
 
-//get File location, pop() removes last element in array and then return it
 let current = window.location.pathname.split("/").pop();
-for(i = 0; i < 5; i++){
-    if(links[i].innerText.toLowerCase() + ".html" == current){
+for (let i = 0; i < 5; i++) {
+    if (links[i].innerText.toLowerCase() + ".html" === current) {
         let page = document.getElementById(links[i].innerText.toLowerCase());
-
         page.style.padding = "10px 25px";
         page.style.backgroundColor = "rgba(255, 30, 0, 0.9)";
         page.style.borderRadius = "10px";
     }
 }
 
-
 /* ===========================================================
-   CLEAN DIGITAL TELEMETRY (NO NEEDLE)
-   =========================================================== */
+   TELEMETRY ENGINE — DIGITAL ONLY (NO NEEDLE)
+=========================================================== */
 
 (function () {
 
@@ -36,27 +36,23 @@ const startBtn = $("#startBtn");
 const stopBtn = $("#stopBtn");
 const resetBtn = $("#resetBtn");
 
-const revFill = document.getElementById("revFill");
-
-/* Engine */
+/* Engine State */
 let speed = 0;
 let rpm = 0;
 let gear = "N";
 let engineRunning = false;
-
 let lastFrame = null;
 
+/* Constants */
 const MAX_SPEED = 400;
 
-/* Team torque settings */
 const TEAMS = {
     mclaren:  { torque: 1.05, gears: 8 },
-    redbull:  { torque: 1.25, gears: 8 },
+    redbull:  { torque: 3.15, gears: 8 },
     ferrari:  { torque: 1.10, gears: 8 },
     mercedes: { torque: 1.12, gears: 8 }
 };
 
-/* Sound presets */
 const PRESETS = {
     standard: { base: 100, noise: 0.3, q: 6 },
     v8:       { base: 70, noise: 0.6, q: 8 },
@@ -64,68 +60,89 @@ const PRESETS = {
     electric: { base: 260, noise: 0.05, q: 3 }
 };
 
-/* Ramp/Timing */
-const RAMP = { gentle: 0.4, normal: 0.8, fast: 1.4 };
-const TIMING = { relaxed: 0.6, standard: 1.0, aggressive: 1.8 };
+const RAMP = {
+    gentle: 0.4,
+    normal: 0.8,
+    fast:   1.4
+};
 
-/* Audio engine objects */
+const TIMING = {
+    relaxed: 0.6,
+    standard: 1.0,
+    aggressive: 1.8
+};
+
+/* AUDIO ENGINE */
 let audioCtx = null, osc = null, noise = null, noiseGen = null, filter = null, master = null;
 
-/* GEARSHIFT SOUND */
 function playGearshift() {
     if (!audioCtx) return;
 
-    // deep thump
-    const thump = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    thump.type = "sine";
-    thump.frequency.value = 70;
-    gain.gain.value = 0.9;
-    thump.connect(gain);
-    gain.connect(audioCtx.destination);
-    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-    thump.start();
-    thump.stop(audioCtx.currentTime + 0.12);
+    // Exhaust thump
+    const thumpOsc = audioCtx.createOscillator();
+    const thumpGain = audioCtx.createGain();
+    thumpOsc.type = "sine";
+    thumpOsc.frequency.value = 65;
+    thumpGain.gain.value = 0.9;
+    thumpOsc.connect(thumpGain);
+    thumpGain.connect(audioCtx.destination);
+    thumpGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+    thumpOsc.start();
+    thumpOsc.stop(audioCtx.currentTime + 0.13);
+
+    // Exhaust crack
+    const crackBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.15, audioCtx.sampleRate);
+    const crackData = crackBuffer.getChannelData(0);
+    for (let i = 0; i < crackData.length; i++)
+        crackData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / crackData.length, 1.8);
+
+    const crackSource = audioCtx.createBufferSource();
+    crackSource.buffer = crackBuffer;
+    const crackGain = audioCtx.createGain();
+    crackGain.gain.value = 1.8;
+    crackGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+    crackSource.connect(crackGain);
+    crackGain.connect(audioCtx.destination);
+    crackSource.start();
 }
 
-/* BURNOUT SOUND */
 function playBurnout() {
     if (!audioCtx) return;
 
-    const bufferSize = audioCtx.sampleRate * 0.2;
-    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const size = audioCtx.sampleRate * 0.25;
+    const buffer = audioCtx.createBuffer(1, size, audioCtx.sampleRate);
     const data = buffer.getChannelData(0);
 
-    for (let i = 0; i < bufferSize; i++)
-        data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+    for (let i = 0; i < size; i++)
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / size, 2);
 
     const src = audioCtx.createBufferSource();
     src.buffer = buffer;
 
-    const g = audioCtx.createGain();
-    g.gain.value = 1;
-    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+    const gain = audioCtx.createGain();
+    gain.gain.value = 1;
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
 
-    src.connect(g);
-    g.connect(audioCtx.destination);
+    src.connect(gain);
+    gain.connect(audioCtx.destination);
     src.start();
 }
 
-/* AUDIO INIT */
 function initAudio() {
-    audioCtx = new AudioContext();
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     osc = audioCtx.createOscillator();
+    osc.type = "sawtooth";
+
     filter = audioCtx.createBiquadFilter();
     filter.type = "lowpass";
 
-    // noise generator
-    const buff = audioCtx.createBuffer(1, audioCtx.sampleRate * 2, audioCtx.sampleRate);
-    const arr = buff.getChannelData(0);
-    for (let i = 0; i < arr.length; i++) arr[i] = Math.random() * 2 - 1;
+    const noiseBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 2, audioCtx.sampleRate);
+    const out = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < out.length; i++) out[i] = Math.random() * 2 - 1;
 
     noiseGen = audioCtx.createBufferSource();
-    noiseGen.buffer = buff;
+    noiseGen.buffer = noiseBuffer;
     noiseGen.loop = true;
 
     noise = audioCtx.createGain();
@@ -137,21 +154,19 @@ function initAudio() {
     noise.connect(master);
     master.connect(audioCtx.destination);
 
-    osc.type = "sawtooth";
     osc.start();
     noiseGen.start();
 }
 
-/* SPEED → RPM */
-function speedToRPM(sp) { return Math.round((sp / MAX_SPEED) * 14000); }
-
-/* RPM → FREQ */
-function rpmToFreq(rpm, preset) {
-    const p = PRESETS[preset];
-    return p.base + (rpm / 14000) * (p.base * 6);
+function speedToRPM(spd) {
+    return Math.round((spd / MAX_SPEED) * 14000);
 }
 
-/* MAIN LOOP */
+function rpmToFreq(rpm, presetName) {
+    const p = PRESETS[presetName];
+    return p.base + (rpm / 14000) * (p.base * 6.5);
+}
+
 function updateTelemetry(t) {
     if (!lastFrame) lastFrame = t;
     const dt = (t - lastFrame) / 1000;
@@ -165,41 +180,33 @@ function updateTelemetry(t) {
     const timing = TIMING[timingSel.value];
 
     const targetSpeed = throttleVal * MAX_SPEED * timing;
-    const accel = team.torque * ramp;
+    const acceleration = team.torque * ramp * (0.8 + throttleVal * 0.4);
 
-    speed += (targetSpeed - speed) * accel * dt;
+    const diff = targetSpeed - speed;
+    speed += diff * acceleration * dt;
+
     if (speed < 0.1) speed = 0;
 
     rpm = speedToRPM(speed);
 
-    // gear calculation
     const g = Math.ceil((rpm / 14000) * team.gears);
     let newGear = speed < 5 ? "N" : Math.min(team.gears, Math.max(1, g));
-    if (newGear !== gear && gear !== "N") playGearshift();
-    gear = newGear;
 
-    // update UI
+    if (newGear !== gear) {
+        if (gear !== "N") playGearshift();
+        gear = newGear;
+    }
+
     speedEl.textContent = Math.round(speed);
     rpmEl.textContent = rpm;
     gearEl.textContent = gear;
 
-    // REV BAR UPDATE
-    const percent = (rpm / 14000) * 100;
-    revFill.style.width = percent + "%";
-
-    if (percent < 40) revFill.style.background = "#00ff00";     // green
-    else if (percent < 80) revFill.style.background = "#ffcc00"; // yellow
-    else revFill.style.background = "#ff1e00";                   // red
-
-    // AUDIO
     if (audioCtx) {
         const freq = rpmToFreq(rpm, presetSel.value);
-
         osc.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.03);
-        filter.frequency.setTargetAtTime(freq * 1.4, audioCtx.currentTime, 0.04);
-
-        noise.gain.setTargetAtTime(preset.noise * throttleVal, audioCtx.currentTime, 0.03);
-        master.gain.setTargetAtTime(Math.min(1, throttleVal + (rpm / 15000)), audioCtx.currentTime, 0.04);
+        filter.frequency.setTargetAtTime(freq * 1.6, audioCtx.currentTime, 0.05);
+        noise.gain.setTargetAtTime(preset.noise * (throttleVal + 0.2), audioCtx.currentTime, 0.03);
+        master.gain.setTargetAtTime(Math.min(0.8, throttleVal + rpm / 15000), audioCtx.currentTime, 0.05);
     }
 
     if (engineRunning) requestAnimationFrame(updateTelemetry);
@@ -211,6 +218,7 @@ let stopwatchRunning = false;
 
 function updateStopwatch() {
     if (!stopwatchRunning) return;
+
     const elapsed = performance.now() - stopwatchStart;
     const m = Math.floor(elapsed / 60000);
     const s = Math.floor((elapsed % 60000) / 1000);
@@ -222,7 +230,7 @@ function updateStopwatch() {
     requestAnimationFrame(updateStopwatch);
 }
 
-/* BUTTON HANDLERS */
+/* BUTTON LOGIC */
 startBtn.addEventListener("click", () => {
     if (!audioCtx) initAudio();
     audioCtx.resume();
@@ -231,71 +239,6 @@ startBtn.addEventListener("click", () => {
     startBtn.disabled = true;
     stopBtn.disabled = false;
 
-    if (throttle.value >= 30) playBurnout();
-
-    stopwatchRunning = true;
-    stopwatchStart = performance.now();
-    requestAnimationFrame(updateStopwatch);
-
-    lastFrame = null;
-    requestAnimationFrame(updateTelemetry);
-});
-
-stopBtn.addEventListener("click", () => {
-    engineRunning = false;
-    stopBtn.disabled = true;
-    startBtn.disabled = false;
-
-    if (master) master.gain.setTargetAtTime(0.001, audioCtx.currentTime, 0.3);
-    stopwatchRunning = false;
-});
-
-resetBtn.addEventListener("click", () => {
-    speed = 0;
-    rpm = 0;
-    gear = "N";
-
-    speedEl.textContent = 0;
-    rpmEl.textContent = 0;
-    gearEl.textContent = "N";
-    revFill.style.width = "0%";
-
-    stopwatchRunning = false;
-    $("#stopwatch").textContent = "00:00.00";
-});
-
-})();
-
-
-/* STOPWATCH */
-let stopwatchStart = 0;
-let stopwatchRunning = false;
-
-function updateStopwatch() {
-    if (!stopwatchRunning) return;
-
-    const elapsed = performance.now() - stopwatchStart;
-
-    const m = Math.floor(elapsed / 60000);
-    const s = Math.floor((elapsed % 60000) / 1000);
-    const cs = Math.floor((elapsed % 1000) / 10);
-
-    $("#stopwatch").textContent =
-        `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}.${String(cs).padStart(2, "0")}`;
-
-    requestAnimationFrame(updateStopwatch);
-}
-
-/* BUTTONS */
-startBtn.addEventListener("click", () => {
-    if (!audioCtx) initAudio();
-    audioCtx.resume();
-
-    engineRunning = true;
-    startBtn.disabled = true;
-    stopBtn.disabled = false;
-
-    /* Burnout sound ONLY if throttle > 30% */
     if (throttle.value >= 30) playBurnout();
 
     stopwatchRunning = true;
@@ -325,13 +268,16 @@ resetBtn.addEventListener("click", () => {
     speedEl.textContent = 0;
     rpmEl.textContent = 0;
     gearEl.textContent = "N";
+
     stopwatchRunning = false;
     $("#stopwatch").textContent = "00:00.00";
 });
 
 })();
 
-/*  CLEAN TEAM INFO PANEL + ACTIVE BUTTON HIGHLIGHT */
+/* ===========================================================
+   TEAM INFO PANEL
+=========================================================== */
 
 const TEAM_DATA = {
     redbull: {
@@ -341,7 +287,7 @@ const TEAM_DATA = {
         engine: "Honda RBPT",
         car: "RB21",
         colors: "#1E5BC6",
-        specs: ["Turbo-Hybrid V6", "ERS: 160hp Assist", "Weight: 798kg", "Top Speed: 355 km/h"]
+        specs: ["Turbo-Hybrid V6", "ERS 160hp Assist", "Weight 798kg", "Top Speed 355 km/h"]
     },
     ferrari: {
         name: "Scuderia Ferrari",
@@ -350,7 +296,7 @@ const TEAM_DATA = {
         engine: "Ferrari 066/10",
         car: "SF-25",
         colors: "#DC0000",
-        specs: ["Turbo-Hybrid V6", "Ferrari MGU-K ERS", "High Downforce", "Top Speed: 350 km/h"]
+        specs: ["Turbo-Hybrid V6", "Ferrari ERS", "High Downforce", "Top Speed 350 km/h"]
     },
     mercedes: {
         name: "Mercedes-AMG Petronas",
@@ -359,7 +305,7 @@ const TEAM_DATA = {
         engine: "Mercedes PU106B",
         car: "W16",
         colors: "#00D2BE",
-        specs: ["Turbo-Hybrid V6", "Ultra Efficient ERS", "Zero-Pod Aero", "Top Speed: 350 km/h"]
+        specs: ["Turbo-Hybrid V6", "Ultra Efficient ERS", "Zero-Pod Aero", "Top Speed 350 km/h"]
     },
     mclaren: {
         name: "McLaren F1 Team",
@@ -368,7 +314,7 @@ const TEAM_DATA = {
         engine: "Mercedes PU",
         car: "MCL38",
         colors: "#FF8700",
-        specs: ["Turbo-Hybrid V6", "ERS: Mercedes", "Papaya Aero", "Top Speed: 348 km/h"]
+        specs: ["Turbo-Hybrid V6", "ERS Mercedes", "Papaya Aero", "Top Speed 348 km/h"]
     },
     astonmartin: {
         name: "Aston Martin Aramco",
@@ -377,52 +323,52 @@ const TEAM_DATA = {
         engine: "Mercedes PU",
         car: "AMR25",
         colors: "#006F62",
-        specs: ["Turbo-Hybrid V6", "Green Arrowhead Aero", "Top Speed: 347 km/h"]
+        specs: ["Turbo-Hybrid V6", "Arrowhead Aero", "Top Speed 347 km/h"]
     },
     rb: {
         name: "Visa CashApp RB",
-        drivers: ["Daniel Ricciardo", "Yuki Tsunoda"],
+        drivers: ["Ricciardo", "Tsunoda"],
         principal: "Laurent Mekies",
         engine: "Honda RBPT",
         car: "VCARB 01",
         colors: "#2B2D42",
-        specs: ["Turbo-Hybrid V6", "Sister Team to Red Bull", "Top Speed: 344 km/h"]
+        specs: ["Turbo-Hybrid V6", "Sister Team", "Top Speed 344 km/h"]
     },
     haas: {
         name: "Haas F1 Team",
-        drivers: ["Nico Hülkenberg", "Kevin Magnussen"],
+        drivers: ["Hülkenberg", "Magnussen"],
         principal: "Ayao Komatsu",
         engine: "Ferrari PU",
         car: "VF-25",
         colors: "#B7B7B7",
-        specs: ["Turbo-Hybrid V6", "Budget Aero", "Top Speed: 340 km/h"]
+        specs: ["Turbo-Hybrid V6", "Budget Development", "Top Speed 340 km/h"]
     },
     williams: {
         name: "Williams Racing",
-        drivers: ["Alex Albon", "Logan Sargeant"],
+        drivers: ["Albon", "Sargeant"],
         principal: "James Vowles",
         engine: "Mercedes PU",
         car: "FW47",
         colors: "#005AFF",
-        specs: ["Turbo-Hybrid V6", "Blue Aero Package", "Top Speed: 346 km/h"]
+        specs: ["Turbo-Hybrid V6", "Blue Aero", "Top Speed 346 km/h"]
     },
     sauber: {
         name: "Kick Sauber",
-        drivers: ["Valtteri Bottas", "Zhou Guanyu"],
+        drivers: ["Bottas", "Zhou"],
         principal: "Andreas Seidl",
         engine: "Ferrari PU",
         car: "C45",
         colors: "#00FF9D",
-        specs: ["Turbo-Hybrid V6", "Green/Black Livery", "Top Speed: 343 km/h"]
+        specs: ["Turbo-Hybrid V6", "Green Livery", "Top Speed 343 km/h"]
     },
     alpine: {
         name: "Alpine F1 Team",
-        drivers: ["Pierre Gasly", "Esteban Ocon"],
+        drivers: ["Gasly", "Ocon"],
         principal: "Bruno Famin",
         engine: "Renault E-Tech",
         car: "A525",
         colors: "#0090FF",
-        specs: ["Turbo-Hybrid V6", "French Aero", "Top Speed: 345 km/h"]
+        specs: ["Turbo-Hybrid V6", "French Aero", "Top Speed 345 km/h"]
     }
 };
 
@@ -432,7 +378,6 @@ const teamCard = document.getElementById("teamCard");
 teamButtons.forEach(btn => {
     btn.addEventListener("click", () => {
 
-        /* ACTIVE BUTTON HIGHLIGHT */
         teamButtons.forEach(b => b.classList.remove("active-team"));
         btn.classList.add("active-team");
 
@@ -457,8 +402,7 @@ teamButtons.forEach(btn => {
             <ul>${team.specs.map(s => `<li>${s}</li>`).join("")}</ul>
         `;
 
-        teamCard.style.backgroundColor = team.colors + "AA"; /* translucent */
+        teamCard.style.backgroundColor = team.colors + "AA";
         teamCard.style.borderColor = team.colors;
     });
 });
-
