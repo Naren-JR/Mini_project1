@@ -1,3 +1,15 @@
+.racing-sans-one-regular {
+  font-family: "Racing Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.titillium-web-regular {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body{
     display: grid;
     grid-template-rows: 1fr 4fr 1fr;  /*Header      Content     Footer*/
