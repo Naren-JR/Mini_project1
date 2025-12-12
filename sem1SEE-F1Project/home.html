@@ -11,203 +11,192 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <img src="https://logos-world.net/wp-content/uploads/2023/12/F1-Logo.png">
-        <nav>
-            <button id="home"><a href="home.html">Home</a></button>
-            <button id="teams"><a href="teams.html">Teams</a></button>
-            <button id="drivers"><a href="drivers.html">Drivers</a></button>
-            <button id="races"><a href="races.html">Races</a></button>
-            <button id="visit"><a href="visit.html">Visit</a></button>
-        </nav>
-    </header>
+<header>
+    <img src="https://logos-world.net/wp-content/uploads/2023/12/F1-Logo.png">
+    <nav>
+        <button id="home"><a href="home.html">Home</a></button>
+        <button id="teams"><a href="teams.html">Teams</a></button>
+        <button id="drivers"><a href="drivers.html">Drivers</a></button>
+        <button id="races"><a href="races.html">Races</a></button>
+        <button id="visit"><a href="visit.html">Visit</a></button>
+    </nav>
+</header>
 
-    <div id="main">
+<div id="main">
 
-    <div class="f1-hub">
+<div class="f1-hub">
 
-        <!-- LEFT: Lando Norris + Live Telemetry -->
-        <section class="hub-left">
+    <!-- LEFT SIDE -->
+    <section class="hub-left">
 
-            <!-- CHAMPION -->
-            <div class="champion-block">
-                <h2>Drivers' Championship</h2>
+        <!-- Champion -->
+        <div class="champion-block">
+            <h2>Drivers' Championship</h2>
 
-                <div class="champ-top">
-                    <img src="https://media.formula1.com/image/upload/c_fill,w_720/q_auto/v1740000000/common/f1/2025/mclaren/lannor01/2025mclarenlannor01right.webp" alt="Lando Norris">
-                    <div class="champ-meta">
-                        <h3>Lando Norris</h3>
-                        <p class="team">McLaren • World Champion • 2025</p>
-                        <p class="points">423 pts</p>
-                    </div>
+            <div class="champ-top">
+                <img src="https://media.formula1.com/image/upload/c_fill,w_720/q_auto/v1740000000/common/f1/2025/mclaren/lannor01/2025mclarenlannor01right.webp">
+                <div class="champ-meta">
+                    <h3>Lando Norris</h3>
+                    <p class="team">McLaren • World Champion • 2025</p>
+                    <p class="points">423 pts</p>
                 </div>
-
-                <ul class="top-five">
-                    <li><span>1. Lando Norris</span><strong>423</strong></li>
-                    <li><span>2. Max Verstappen</span><strong>401</strong></li>
-                    <li><span>3. Oscar Piastri</span><strong>376</strong></li>
-                    <li><span>4. Lewis Hamilton</span><strong>318</strong></li>
-                    <li><span>5. Charles Leclerc</span><strong>307</strong></li>
-                </ul>
             </div>
 
-            <!-- TELEMETRY PANEL -->
-            <div class="telemetry-panel">
-                <h2>Live Telemetry</h2>
-
-                <!-- OPTIONS -->
-                <div class="controls">
-                    <label>
-                        Team:
-                        <select id="teamSelect">
-                            <option value="mclaren">McLaren</option>
-                            <option value="redbull">Red Bull</option>
-                            <option value="ferrari">Ferrari</option>
-                            <option value="mercedes">Mercedes</option>
-                        </select>
-                    </label>
-
-                    <label>
-                        Sound Preset:
-                        <select id="soundPreset">
-                            <option value="standard">Standard</option>
-                            <option value="v8">V8 (gruff)</option>
-                            <option value="v6">V6 (bright)</option>
-                            <option value="electric">Electric (whine)</option>
-                        </select>
-                    </label>
-
-                    <label>
-                        Ramp Speed:
-                        <select id="rampSelect">
-                            <option value="gentle">Gentle</option>
-                            <option value="normal">Normal</option>
-                            <option value="fast">Fast</option>
-                        </select>
-                    </label>
-                </div>
-
-                <!-- SPEEDOMETER -->
-                <div class="speedometer-wrap">
-
-                    <!-- DIGITAL REV BAR -->
-<div class="revbar-container">
-    <div class="revbar-fill" id="revFill"></div>
-</div>
-
-<div class="digital-readouts">
-    <div class="speed-digital">
-        <span id="speedVal">0</span><small> km/h</small>
-    </div>
-    <div class="gear-digital">Gear: <span id="gearVal">N</span></div>
-    <div class="rpm-digital">RPM: <span id="rpmVal">0</span></div>
-</div>
-
-
-                    <div class="digital-readouts">
-                        <div class="speed-digital"><span id="speedVal">0</span><small> km/h</small></div>
-                        <div class="gear-digital">Gear: <span id="gearVal">N</span></div>
-                        <div class="rpm-digital">RPM: <span id="rpmVal">0</span></div>
-                    </div>
-
-                </div>
-
-                <!-- THROTTLE + BUTTONS -->
-                <div class="tele-controls">
-                    <label class="throttle">
-                        Throttle
-                        <input id="throttleInput" type="range" min="0" max="100" value="0">
-                    </label>
-
-                    <div class="tele-buttons">
-                        <button id="startBtn">Start Engine</button>
-                        <button id="stopBtn" disabled>Stop</button>
-                        <button id="resetBtn">Reset</button>
-                    </div>
-                </div>
-
-                <!-- STOPWATCH -->
-                <div class="timers">
-                    <div class="stopwatch">
-                        <div class="sw-digits" id="stopwatch">00:00.00</div>
-                    </div>
-
-                    <div class="lap-info">
-                        <label>
-                            Timing preset:
-                            <select id="timingPreset">
-                                <option value="relaxed">Relaxed</option>
-                                <option value="standard" selected>Standard</option>
-                                <option value="aggressive">Aggressive</option>
-                            </select>
-                        </label>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ============================== -->
-<!--     DYNAMIC TEAM INFO PANEL    -->
-<!-- ============================== -->
-<div class="team-info-panel">
-
-    <h2>Select a Team for info</h2>
-
-    <div class="team-buttons">
-        <button data-team="redbull">Red Bull</button>
-        <button data-team="mercedes">Mercedes</button>
-        <button data-team="ferrari">Ferrari</button>
-        <button data-team="mclaren">McLaren</button>
-        <button data-team="astonmartin">Aston Martin</button>
-        <button data-team="rb">RB</button>
-        <button data-team="haas">Haas</button>
-        <button data-team="williams">Williams</button>
-        <button data-team="sauber">Kick Sauber</button>
-        <button data-team="alpine">Alpine</button>
-    </div>
-
-    <!-- Dynamic Output -->
-    <div class="team-card" id="teamCard">
-        <h3>Select a team to view details</h3>
-        <p>Drivers, Engine, Car Specs, Team Principal, and more will appear here.</p>
-    </div>
-
-</div>
-
-
-        <!-- RIGHT: STATIC BREAKING NEWS -->
-        <section class="hub-right">
-            <h2 class="news-title">Breaking News</h2>
-
-            <div class="news-container">
-                <p>• Ferrari announces major aero upgrade for next race.</p>
-                <p>• McLaren takes Constructors’ lead after Norris victory.</p>
-                <p>• FIA releases updated 2025 regulations draft.</p>
-                <p>• Mercedes confirms power unit breakthrough.</p>
-                <p>• Red Bull faces wind tunnel time penalty adjustment.</p>
-                <p>• Aston Martin signs new technical director for 2025.</p>
-            </div>
-        </section>
-
-    </div>
-
-</div>
-
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-left">
-                <h3>F1 Central</h3>
-                <p>Your hub for teams, drivers & race info.</p>
-            </div>
-            <div class="footer-right">
-                <p>© 2025 F1 Project • Made by Praful & Naren</p>
-            </div>
+            <ul class="top-five">
+                <li><span>1. Lando Norris</span><strong>423</strong></li>
+                <li><span>2. Max Verstappen</span><strong>401</strong></li>
+                <li><span>3. Oscar Piastri</span><strong>376</strong></li>
+                <li><span>4. Lewis Hamilton</span><strong>318</strong></li>
+                <li><span>5. Charles Leclerc</span><strong>307</strong></li>
+            </ul>
         </div>
-    </footer>
+
+        <!-- TELEMETRY -->
+        <div class="telemetry-panel">
+            <h2>Live Telemetry</h2>
+
+            <!-- OPTIONS -->
+            <div class="controls">
+                <label>
+                    Team:
+                    <select id="teamSelect">
+                        <option value="mclaren">McLaren</option>
+                        <option value="redbull">Red Bull</option>
+                        <option value="ferrari">Ferrari</option>
+                        <option value="mercedes">Mercedes</option>
+                    </select>
+                </label>
+
+                <label>
+                    Sound Preset:
+                    <select id="soundPreset">
+                        <option value="standard">Standard</option>
+                        <option value="v8">V8</option>
+                        <option value="v6">V6</option>
+                        <option value="electric">Electric</option>
+                    </select>
+                </label>
+
+                <label>
+                    Ramp Speed:
+                    <select id="rampSelect">
+                        <option value="gentle">Gentle</option>
+                        <option value="normal">Normal</option>
+                        <option value="fast">Fast</option>
+                    </select>
+                </label>
+            </div>
+
+            <!-- SPEEDOMETER ARC -->
+            <div class="speedometer-wrap">
+
+                <svg class="speed-arc" viewBox="0 0 200 120">
+                    <path d="M20,100 A80,80 0 0,1 180,100"
+                          fill="none" stroke="#222" stroke-width="12"/>
+                </svg>
+
+                <div class="digital-readouts">
+                    <div class="speed-digital">
+                        <span id="speedVal">0</span><small> km/h</small>
+                    </div>
+                    <div class="gear-digital">Gear: <span id="gearVal">N</span></div>
+                    <div class="rpm-digital">RPM: <span id="rpmVal">0</span></div>
+                </div>
+
+            </div>
+
+            <!-- THROTTLE -->
+            <div class="tele-controls">
+                <label class="throttle">
+                    Throttle
+                    <input id="throttleInput" type="range" min="0" max="100" value="0">
+                </label>
+
+                <div class="tele-buttons">
+                    <button id="startBtn">Start Engine</button>
+                    <button id="stopBtn" disabled>Stop</button>
+                    <button id="resetBtn">Reset</button>
+                </div>
+            </div>
+
+            <!-- STOPWATCH -->
+            <div class="timers">
+                <div class="stopwatch">
+                    <div class="sw-digits" id="stopwatch">00:00.00</div>
+                </div>
+
+                <div class="lap-info">
+                    <label>
+                        Timing preset:
+                        <select id="timingPreset">
+                            <option value="relaxed">Relaxed</option>
+                            <option value="standard" selected>Standard</option>
+                            <option value="aggressive">Aggressive</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TEAM INFO PANEL -->
+    <div class="team-info-panel">
+
+        <h2>Select a Team for info</h2>
+
+        <div class="team-buttons">
+            <button data-team="redbull">Red Bull</button>
+            <button data-team="mercedes">Mercedes</button>
+            <button data-team="ferrari">Ferrari</button>
+            <button data-team="mclaren">McLaren</button>
+            <button data-team="astonmartin">Aston Martin</button>
+            <button data-team="rb">RB</button>
+            <button data-team="haas">Haas</button>
+            <button data-team="williams">Williams</button>
+            <button data-team="sauber">Kick Sauber</button>
+            <button data-team="alpine">Alpine</button>
+        </div>
+
+        <div class="team-card" id="teamCard">
+            <h3>Select a team to view details</h3>
+            <p>Drivers, Engine, Car Specs, Team Principal, and more will appear here.</p>
+        </div>
+
+    </div>
+
+    <!-- RIGHT NEWS -->
+    <section class="hub-right">
+        <h2 class="news-title">Breaking News</h2>
+
+        <div class="news-container">
+            <p>• Ferrari announces major aero upgrade.</p>
+            <p>• McLaren takes Constructors' lead.</p>
+            <p>• FIA releases 2025 regulations draft.</p>
+            <p>• Mercedes confirms power unit breakthrough.</p>
+            <p>• Red Bull faces wind tunnel penalty.</p>
+            <p>• Aston Martin signs new technical director.</p>
+        </div>
+    </section>
+
+</div>
+
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-left">
+            <h3>F1 Central</h3>
+            <p>Your hub for teams, drivers & race info.</p>
+        </div>
+        <div class="footer-right">
+            <p>© 2025 F1 Project • Made by Praful & Naren</p>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
