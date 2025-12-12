@@ -108,126 +108,119 @@ footer{
     padding: 20px;
 }
 
-/* ==== LEFT SIDE ==== */
-
-.hub-left .hub-title {
-    font-size: 2.4rem;
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px #ff1e00;
-}
-
-/* Live Telemetry Box */
-.telemetry-box {
+/* LEFT SIDE */
+.champion-block {
     background: rgba(255,255,255,0.05);
     border: 2px solid #ff1e00;
-    padding: 20px;
     border-radius: 12px;
-    text-align: center;
-    margin-bottom: 20px;
+    padding: 15px;
 }
-.speed-display {
-    font-size: 3rem;
-    margin: 10px 0;
-    font-family: 'Racing Sans One';
-}
-.rpm-circle {
-    margin: 10px auto;
-    width: 160px;
-}
-#startSim {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background: #ff1e00;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    font-size: 18px;
-}
-#startSim:hover {
-    background: #ff4d3d;
-}
-
-/* CountDown */
-.race-countdown {
-    margin-top: 20px;
-    padding: 20px;
-    background: #111;
-    border-radius: 10px;
-    border: 2px solid #222;
-}
-.countdown-grid {
+.champ-top {
     display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
+    gap: 12px;
+    align-items: center;
 }
-.countdown-grid div {
-    text-align: center;
+.champ-top img {
+    width: 85px;
+    height: 85px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #ff1e00;
 }
-.countdown-grid span {
-    font-size: 1.8rem;
-    color: #ff1e00;
-}
-
-/* Standings Box */
-.standings-box {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 12px;
-    border: 2px solid #222;
-}
-.standings-box ul {
+.top-five {
     list-style: none;
     padding: 0;
+    margin-top: 12px;
 }
-.standings-box li {
+.top-five li {
     display: flex;
     justify-content: space-between;
     padding: 6px 0;
-    font-size: 1.1rem;
+    border-bottom: 1px dashed rgba(255,255,255,0.07);
 }
 
-/* ==== RIGHT SIDE (Breaking News) ==== */
-
-.hub-right {
-    height: 100%;
-}
-.news-title {
-    font-size: 1.8rem;
-    text-shadow: 0 0 10px #ff1e00;
-}
-
-/* Glowing Container */
-.news-container {
-    height: 500px;
-    overflow: hidden;
-    border: 2px solid #ff1e00;
+/* TELEMETRY */
+.telemetry-panel {
+    background: rgba(0,0,0,0.4);
     border-radius: 12px;
-    padding: 10px;
-    background: rgba(0,0,0,0.45);
+    padding: 15px;
+    border: 2px solid #ff1e00;
+    margin-top: 20px;
+}
+.controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.controls select {
+    margin-left: 5px;
+    padding: 4px;
+}
+
+/* SPEEDOMETER */
+.speedometer-wrap {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+.speed-svg {
+    width: 220px;
+    height: 130px;
+}
+.digital-readouts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.speed-digital {
+    font-size: 2rem;
+    color: #ff1e00;
+    font-family: "Racing Sans One";
+}
+
+/* THROTTLE + BUTTONS */
+.throttle input {
+    width: 200px;
+    accent-color: #ff1e00;
+}
+.tele-buttons button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #ff1e00;
+    color: white;
+    cursor: pointer;
+}
+.tele-buttons button[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* STOPWATCH */
+.stopwatch {
+    background: black;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+.sw-digits {
+    font-family: "Racing Sans One";
+    font-size: 1.2rem;
+}
+
+/* RIGHT SIDE - NEWS */
+.news-container {
+    background: rgba(0,0,0,0.4);
+    border: 2px solid #ff1e00;
+    padding: 15px;
+    border-radius: 12px;
     box-shadow: 0 0 20px #ff1e00;
 }
 
-/* Scroll Area */
-.news-scroll {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    animation: scrollNewsVertical 20s linear infinite;
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .f1-hub {
+        grid-template-columns: 1fr;
+    }
 }
-.news-scroll p {
-    font-size: 1.1rem;
-    padding: 4px 0;
-}
-
-/* Vertical Scrolling */
-@keyframes scrollNewsVertical {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-100%); }
-}
-
-/* Pause on Hover */
-.news-container:hover .news-scroll {
-    animation-play-state: paused;
-}
-
