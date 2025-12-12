@@ -12,204 +12,242 @@ for(i = 0; i < 5; i++){
     }
 }
 
-/* =============================
-   INTERACTIVE LIVE TELEMETRY
-============================= */
+
+/* ===========================================================
+   UPDATED ADVANCED TELEMETRY ENGINE (WITH GEARSHIFT + BURNOUT)
+   =========================================================== */
 
 (function () {
 
 const $ = s => document.querySelector(s);
 
-let speed = 0;
-let rpm = 0;
-let gear = "N";
-let engineRunning = false;
-
+/* DOM */
 const speedEl = $("#speedVal");
 const rpmEl = $("#rpmVal");
 const gearEl = $("#gearVal");
 const throttle = $("#throttleInput");
 const needle = $("#needleGroup");
 
-const teamSelect = $("#teamSelect");
-const presetSelect = $("#soundPreset");
-const rampSelect = $("#rampSelect");
-const timingSelect = $("#timingPreset");
+const teamSel = $("#teamSelect");
+const presetSel = $("#soundPreset");
+const rampSel = $("#rampSelect");
+const timingSel = $("#timingPreset");
 
 const startBtn = $("#startBtn");
 const stopBtn = $("#stopBtn");
 const resetBtn = $("#resetBtn");
 
-let audioCtx = null, osc = null, noise = null, filter = null, master = null;
+/* STATE */
+let speed = 0;
+let rpm = 0;
+let gear = "N";
+let engineRunning = false;
 
+/* Performance timing */
+let lastFrame = null;
+
+/* MAX SPEED now 400 */
+const MAX_SPEED = 400;
+
+/* Team characteristics */
 const TEAMS = {
-    mclaren:  { max: 345, torque: 1.0, gears: 8 },
-    ferrari:  { max: 350, torque: 1.1, gears: 8 },
-    redbull:  { max: 360, torque: 1.2, gears: 8 },
-    mercedes: { max: 355, torque: 1.15, gears: 8 }
+    mclaren:  { torque: 1.05, gears: 8 },
+    redbull:  { torque: 1.15, gears: 8 },
+    ferrari:  { torque: 1.10, gears: 8 },
+    mercedes: { torque: 1.12, gears: 8 }
 };
 
+/* Sound presets */
 const PRESETS = {
-    standard: { base: 80, noise: 0.3, q: 5 },
-    v8:       { base: 65, noise: 0.5, q: 7 },
-    v6:       { base: 100, noise: 0.25, q: 4 },
-    electric: { base: 250, noise: 0.05, q: 2 }
+    standard: { base: 100, noise: 0.3, q: 6 },
+    v8:       { base: 70, noise: 0.6, q: 8 },
+    v6:       { base: 120, noise: 0.25, q: 5 },
+    electric: { base: 260, noise: 0.05, q: 3 }
 };
 
+/* Ramp presets */
 const RAMP = {
     gentle: 0.4,
     normal: 0.8,
     fast:   1.4
 };
 
+/* Timing presets */
 const TIMING = {
     relaxed: 0.6,
     standard: 1.0,
-    aggressive: 1.6
+    aggressive: 1.8
 };
 
+/* AUDIO ENGINE */
+let audioCtx = null, osc = null, noise = null, noiseGen = null, filter = null, master = null;
 
-/* ========= Build Speed Ticks =========== */
+/* Special sound bursts */
+function playGearshift() {
+    if (!audioCtx) return;
 
-(function buildTicks() {
-    const g = document.getElementById("ticks");
-    for (let i = 0; i <= 12; i++) {
-        const angle = -90 + (i * 180/12);
-        const x1 = 100 + Math.cos(angle * Math.PI/180)*70;
-        const y1 = 100 + Math.sin(angle * Math.PI/180)*70;
-        const x2 = 100 + Math.cos(angle * Math.PI/180)*60;
-        const y2 = 100 + Math.sin(angle * Math.PI/180)*60;
+    const burst = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
 
-        const ln = document.createElementNS("http://www.w3.org/2000/svg","line");
-        ln.setAttribute("x1",x1);
-        ln.setAttribute("y1",y1);
-        ln.setAttribute("x2",x2);
-        ln.setAttribute("y2",y2);
-        ln.setAttribute("stroke","#aaa");
-        ln.setAttribute("stroke-width", i % 3 === 0 ? 2 : 1);
-        g.appendChild(ln);
+    burst.type = "square";
+    burst.frequency.value = 400;
 
-        if (i % 2 === 0) {
-            const tx = 100 + Math.cos(angle * Math.PI/180)*48;
-            const ty = 100 + Math.sin(angle * Math.PI/180)*48 + 3;
+    gain.gain.value = 0.6;
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
 
-            const label = document.createElementNS("http://www.w3.org/2000/svg","text");
-            label.setAttribute("x",tx);
-            label.setAttribute("y",ty);
-            label.setAttribute("fill","#ccc");
-            label.setAttribute("font-size","10");
-            label.setAttribute("text-anchor","middle");
-            label.textContent = Math.round((i/12)*360);
-            g.appendChild(label);
-        }
+    burst.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    burst.start();
+    burst.stop(audioCtx.currentTime + 0.15);
+}
+
+function playBurnout() {
+    if (!audioCtx) return;
+
+    const bufferSize = audioCtx.sampleRate * 0.25;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 2);
     }
-})();
 
+    const source = audioCtx.createBufferSource();
+    source.buffer = buffer;
 
-/* ========== Audio Setup ========== */
+    const gain = audioCtx.createGain();
+    gain.gain.value = 1;
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
 
+    source.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    source.start();
+}
+
+/* INITIALIZE AUDIO NODES */
 function initAudio() {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
     osc = audioCtx.createOscillator();
     osc.type = "sawtooth";
 
     filter = audioCtx.createBiquadFilter();
     filter.type = "lowpass";
 
-    let buff = audioCtx.createBuffer(1, audioCtx.sampleRate*2, audioCtx.sampleRate);
-    let data = buff.getChannelData(0);
-    for (let i=0;i<data.length;i++) data[i] = Math.random()*2-1;
+    /* Base engine noise */
+    const noiseBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 2, audioCtx.sampleRate);
+    const out = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < out.length; i++) out[i] = Math.random() * 2 - 1;
 
-    let noiseSource = audioCtx.createBufferSource();
-    noiseSource.buffer = buff;
-    noiseSource.loop = true;
+    noiseGen = audioCtx.createBufferSource();
+    noiseGen.buffer = noiseBuffer;
+    noiseGen.loop = true;
 
     noise = audioCtx.createGain();
     master = audioCtx.createGain();
 
-    noiseSource.connect(noise);
+    noiseGen.connect(noise);
     osc.connect(filter);
     filter.connect(master);
     noise.connect(master);
     master.connect(audioCtx.destination);
 
     osc.start();
-    noiseSource.start();
+    noiseGen.start();
 }
 
-
-/* ========== Speed → RPM Mapping ========== */
-function speedToRPM(v, max) {
-    return Math.round((v/max) * 14000);
+/* MAP SPEED → RPM */
+function speedToRPM(spd) {
+    return Math.round((spd / MAX_SPEED) * 14000);
 }
 
-/* ========== RPM → Engine Frequency ========== */
+/* MAP RPM → FREQUENCY */
 function rpmToFreq(rpm, preset) {
     const p = PRESETS[preset];
-    return p.base + (rpm/14000)*(p.base*6);
+    return p.base + (rpm / 14000) * (p.base * 6.5);
 }
 
+/* MAIN TELEMETRY UPDATE */
+function updateTelemetry(t) {
+    if (!lastFrame) lastFrame = t;
+    const dt = (t - lastFrame) / 1000;
+    lastFrame = t;
 
-/* ========== Telemetry Loop ========== */
-let lastTime = null;
+    const throttleVal = throttle.value / 100;
+    const team = TEAMS[teamSel.value];
+    const preset = PRESETS[presetSel.value];
 
-function loop(ts) {
-    if (!lastTime) lastTime = ts;
-    const dt = (ts - lastTime)/1000;
-    lastTime = ts;
+    const ramp = RAMP[rampSel.value];
+    const timing = TIMING[timingSel.value];
 
-    const t = throttle.value / 100;
-    const team = TEAMS[teamSelect.value];
-    const preset = PRESETS[presetSelect.value];
-    const ramp = RAMP[rampSelect.value];
-    const timing = TIMING[timingSelect.value];
+    /* Target speed based on throttle */
+    const targetSpeed = throttleVal * MAX_SPEED * timing;
 
-    const target = t * team.max * timing;
-    speed += (target - speed) * dt * team.torque * ramp;
+    const acceleration = team.torque * ramp * (0.8 + throttleVal * 0.4);
+
+    /* Smooth acceleration */
+    signal = targetSpeed - speed;
+    speed += signal * acceleration * dt;
+
     if (speed < 0.1) speed = 0;
 
-    rpm = speedToRPM(speed, team.max);
+    rpm = speedToRPM(speed);
 
-    if (speed < 5) gear = "N";
-    else gear = Math.min(team.gears, Math.ceil(rpm/2000));
+    /* Gear calculation */
+    const g = Math.ceil((rpm / 14000) * team.gears);
+    let newGear = speed < 5 ? "N" : Math.min(team.gears, Math.max(1, g));
 
+    if (newGear !== gear) {
+        if (gear !== "N") playGearshift(); // gearshift sound
+        gear = newGear;
+    }
+
+    /* Update UI */
     speedEl.textContent = Math.round(speed);
     rpmEl.textContent = rpm;
     gearEl.textContent = gear;
 
-    const angle = (speed/team.max)*180 - 90;
+    /* Need rotation fix */
+    const angle = (speed / MAX_SPEED) * 180 - 90;
     needle.style.transform = `translate(100px,100px) rotate(${angle}deg)`;
 
     /* AUDIO UPDATE */
-    const f = rpmToFreq(rpm, presetSelect.value);
-    filter.frequency.setTargetAtTime(f*1.5, audioCtx.currentTime, 0.05);
-    filter.Q.setTargetAtTime(preset.q, audioCtx.currentTime, 0.05);
-    noise.gain.setTargetAtTime(preset.noise * (t+0.1), audioCtx.currentTime, 0.03);
-    master.gain.setTargetAtTime(Math.min(0.7, t + rpm/15000), audioCtx.currentTime, 0.03);
-    osc.frequency.setTargetAtTime(f, audioCtx.currentTime, 0.03);
+    if (audioCtx) {
+        const freq = rpmToFreq(rpm, presetSel.value);
 
-    if (engineRunning) requestAnimationFrame(loop);
+        osc.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.03);
+        filter.frequency.setTargetAtTime(freq * 1.6, audioCtx.currentTime, 0.05);
+        filter.Q.setTargetAtTime(preset.q, audioCtx.currentTime, 0.05);
+
+        noise.gain.setTargetAtTime(preset.noise * (throttleVal + 0.2), audioCtx.currentTime, 0.03);
+        master.gain.setTargetAtTime(Math.min(0.8, throttleVal + rpm / 15000), audioCtx.currentTime, 0.05);
+    }
+
+    if (engineRunning) requestAnimationFrame(updateTelemetry);
 }
 
-/* ========== Stopwatch ========== */
-let startTime = 0, swRunning = false;
+/* STOPWATCH */
+let stopwatchStart = 0;
+let stopwatchRunning = false;
 
 function updateStopwatch() {
-    if (!swRunning) return;
-    const now = performance.now() - startTime;
+    if (!stopwatchRunning) return;
 
-    const m = Math.floor(now/60000);
-    const s = Math.floor((now%60000)/1000);
-    const cs = Math.floor((now%1000)/10);
+    const elapsed = performance.now() - stopwatchStart;
+
+    const m = Math.floor(elapsed / 60000);
+    const s = Math.floor((elapsed % 60000) / 1000);
+    const cs = Math.floor((elapsed % 1000) / 10);
 
     $("#stopwatch").textContent =
-        `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(cs).padStart(2,'0')}`;
+        `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}.${String(cs).padStart(2, "0")}`;
 
     requestAnimationFrame(updateStopwatch);
 }
 
-/* ========== BUTTONS ========== */
-
+/* BUTTONS */
 startBtn.addEventListener("click", () => {
     if (!audioCtx) initAudio();
     audioCtx.resume();
@@ -218,14 +256,15 @@ startBtn.addEventListener("click", () => {
     startBtn.disabled = true;
     stopBtn.disabled = false;
 
-    speed = 0;
+    /* Burnout sound ONLY if throttle > 30% */
+    if (throttle.value >= 30) playBurnout();
 
-    lastTime = null;
-    requestAnimationFrame(loop);
-
-    swRunning = true;
-    startTime = performance.now();
+    stopwatchRunning = true;
+    stopwatchStart = performance.now();
     requestAnimationFrame(updateStopwatch);
+
+    lastFrame = null;
+    requestAnimationFrame(updateTelemetry);
 });
 
 stopBtn.addEventListener("click", () => {
@@ -233,21 +272,25 @@ stopBtn.addEventListener("click", () => {
     stopBtn.disabled = true;
     startBtn.disabled = false;
 
-    master.gain.setTargetAtTime(0.001, audioCtx.currentTime, 0.2);
-    swRunning = false;
+    if (master)
+        master.gain.setTargetAtTime(0.001, audioCtx.currentTime, 0.3);
+
+    stopwatchRunning = false;
 });
 
 resetBtn.addEventListener("click", () => {
     speed = 0;
     rpm = 0;
-    speedEl.textContent = "0";
-    rpmEl.textContent = "0";
+    gear = "N";
+
+    speedEl.textContent = 0;
+    rpmEl.textContent = 0;
     gearEl.textContent = "N";
+
     needle.style.transform = `translate(100px,100px) rotate(-90deg)`;
 
+    stopwatchRunning = false;
     $("#stopwatch").textContent = "00:00.00";
-    swRunning = false;
 });
-
 
 })();
