@@ -143,6 +143,11 @@ a{
     margin: 25px;
 }
 
+.car{
+    width: 75%;
+    justify-self: center;
+}
+
 .logoNames{
     display: grid;
     grid-template-columns: auto auto;
@@ -151,7 +156,12 @@ a{
 }
 
 .logoNames img{
-    width: 50%;
+    width: 245px;
+}
+
+#ferrari{
+    overflow: hidden;
+    transform: translateX(100px);
 }
 
 footer{

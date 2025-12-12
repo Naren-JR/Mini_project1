@@ -76,7 +76,7 @@ const TIMING = {
 /* AUDIO ENGINE */
 let audioCtx = null, osc = null, noise = null, noiseGen = null, filter = null, master = null;
 
-/* Special sound bursts *//
+/* Special sound bursts */
 function playGearshift() {
     if (!audioCtx) return;
 
