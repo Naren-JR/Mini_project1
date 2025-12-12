@@ -68,46 +68,110 @@ const TIMING = { relaxed: 0.6, standard: 1.0, aggressive: 1.8 };
 /* AUDIO ENGINE */
 let audioCtx = null, osc = null, noise = null, noiseGen = null, filter = null, master = null;
 
+/* ===========================================================
+   RACER VIBES — FULL EXHAUST PACK
+   Gearshift: THUMP + CRACK + PSHH
+   Burnout: Heavy tyre spin noise
+=========================================================== */
+
 function playGearshift() {
     if (!audioCtx) return;
 
-    const thump = audioCtx.createOscillator();
+    /* ------------------------
+       1. LOW-END GEAR THUMP
+    ------------------------ */
+    const thumpOsc = audioCtx.createOscillator();
     const thumpGain = audioCtx.createGain();
 
-    thump.type = "sine";
-    thump.frequency.value = 65;
-    thumpGain.gain.value = 0.9;
+    thumpOsc.type = "sine";
+    thumpOsc.frequency.value = 60;    // deep bass hit
+    thumpGain.gain.value = 1.3;       // hard impact
 
-    thump.connect(thumpGain);
+    thumpOsc.connect(thumpGain);
     thumpGain.connect(audioCtx.destination);
 
-    thumpGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+    thumpGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.13);
 
-    thump.start();
-    thump.stop(audioCtx.currentTime + 0.13);
+    thumpOsc.start();
+    thumpOsc.stop(audioCtx.currentTime + 0.14);
+
+    /* ------------------------
+       2. EXHAUST CRACK POP
+       (white-noise envelope)
+    ------------------------ */
+    const crackBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.12, audioCtx.sampleRate);
+    const crackData = crackBuffer.getChannelData(0);
+
+    for (let i = 0; i < crackData.length; i++) {
+        crackData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / crackData.length, 1.7);
+    }
+
+    const crackSource = audioCtx.createBufferSource();
+    crackSource.buffer = crackBuffer;
+
+    const crackGain = audioCtx.createGain();
+    crackGain.gain.value = 2.0;   // strong punch
+    crackGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+
+    crackSource.connect(crackGain);
+    crackGain.connect(audioCtx.destination);
+
+    crackSource.start();
+
+    /* ------------------------
+       3. WASTEGATE "PSHHH"
+    ------------------------ */
+    const gaspBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.22, audioCtx.sampleRate);
+    const gaspData = gaspBuffer.getChannelData(0);
+
+    for (let i = 0; i < gaspData.length; i++) {
+        gaspData[i] = (Math.random() * 2 - 1) * (0.4 * (1 - i / gaspData.length));
+    }
+
+    const gaspSource = audioCtx.createBufferSource();
+    gaspSource.buffer = gaspBuffer;
+
+    const gaspGain = audioCtx.createGain();
+    gaspGain.gain.value = 0.9;
+    gaspGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.19);
+
+    gaspSource.connect(gaspGain);
+    gaspGain.connect(audioCtx.destination);
+
+    gaspSource.start();
 }
 
+/* ===========================================================
+   BURNOUT SOUND — MASSIVE TYRE SPIN NOISE
+=========================================================== */
 function playBurnout() {
     if (!audioCtx) return;
 
-    const size = audioCtx.sampleRate * 0.2;
+    const size = audioCtx.sampleRate * 0.55; // half-second burn
     const buffer = audioCtx.createBuffer(1, size, audioCtx.sampleRate);
     const data = buffer.getChannelData(0);
 
-    for (let i = 0; i < size; i++)
-        data[i] = (Math.random() * 2 - 1) * (1 - i / size);
+    for (let i = 0; i < size; i++) {
+        let white = Math.random() * 2 - 1;
+        let fade = Math.pow((1 - i / size), 1.3);
+        data[i] = white * fade * 1.4;
+    }
 
     const src = audioCtx.createBufferSource();
     src.buffer = buffer;
 
     const gain = audioCtx.createGain();
-    gain.gain.value = 1.2;
+    gain.gain.value = 1.8;  // LOUD tyre screech
+
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
 
     src.connect(gain);
     gain.connect(audioCtx.destination);
 
     src.start();
 }
+
+
 
 function initAudio() {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
