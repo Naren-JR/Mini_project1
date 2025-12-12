@@ -138,7 +138,7 @@ footer{
     border-radius: 10px;
     object-fit: cover;
     border: 2px solid #ff1e00;
-    object-position: top;
+    object-position: top-center;
 }
 .top-five {
     list-style: none;
