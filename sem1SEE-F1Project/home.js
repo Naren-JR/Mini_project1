@@ -1,6 +1,6 @@
 /* ===============================
    NAVBAR HIGHLIGHT
-   =============================== */
+=============================== */
 let links = document.querySelectorAll("nav button");
 
 let current = window.location.pathname.split("/").pop();
@@ -14,7 +14,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 /* ===========================================================
-   TELEMETRY ENGINE — DIGITAL ONLY (NO NEEDLE)
+   TELEMETRY ENGINE — DIGITAL SPEED + SEMI ARC (NO NEEDLE)
 =========================================================== */
 
 (function () {
@@ -78,7 +78,7 @@ let audioCtx = null, osc = null, noise = null, noiseGen = null, filter = null, m
 function playGearshift() {
     if (!audioCtx) return;
 
-    // Exhaust thump
+    // Deep thump
     const thumpOsc = audioCtx.createOscillator();
     const thumpGain = audioCtx.createGain();
     thumpOsc.type = "sine";
@@ -197,12 +197,15 @@ function updateTelemetry(t) {
         gear = newGear;
     }
 
+    // UPDATE DIGITAL UI
     speedEl.textContent = Math.round(speed);
     rpmEl.textContent = rpm;
     gearEl.textContent = gear;
 
+    // AUDIO UPDATE
     if (audioCtx) {
         const freq = rpmToFreq(rpm, presetSel.value);
+
         osc.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.03);
         filter.frequency.setTargetAtTime(freq * 1.6, audioCtx.currentTime, 0.05);
         noise.gain.setTargetAtTime(preset.noise * (throttleVal + 0.2), audioCtx.currentTime, 0.03);
@@ -212,7 +215,9 @@ function updateTelemetry(t) {
     if (engineRunning) requestAnimationFrame(updateTelemetry);
 }
 
-/* STOPWATCH */
+/* ===============================
+   STOPWATCH
+=============================== */
 let stopwatchStart = 0;
 let stopwatchRunning = false;
 
@@ -230,7 +235,10 @@ function updateStopwatch() {
     requestAnimationFrame(updateStopwatch);
 }
 
-/* BUTTON LOGIC */
+/* ===============================
+   BUTTON LOGIC
+=============================== */
+
 startBtn.addEventListener("click", () => {
     if (!audioCtx) initAudio();
     audioCtx.resume();
@@ -287,7 +295,7 @@ const TEAM_DATA = {
         engine: "Honda RBPT",
         car: "RB21",
         colors: "#1E5BC6",
-        specs: ["Turbo-Hybrid V6", "ERS 160hp Assist", "Weight 798kg", "Top Speed 355 km/h"]
+        specs: ["Turbo-Hybrid V6", "ERS 160hp", "Weight 798kg", "Top Speed 355 km/h"]
     },
     ferrari: {
         name: "Scuderia Ferrari",
@@ -305,7 +313,7 @@ const TEAM_DATA = {
         engine: "Mercedes PU106B",
         car: "W16",
         colors: "#00D2BE",
-        specs: ["Turbo-Hybrid V6", "Ultra Efficient ERS", "Zero-Pod Aero", "Top Speed 350 km/h"]
+        specs: ["Hybrid V6", "Efficient ERS", "Zero-Pod", "Top Speed 350 km/h"]
     },
     mclaren: {
         name: "McLaren F1 Team",
@@ -314,7 +322,7 @@ const TEAM_DATA = {
         engine: "Mercedes PU",
         car: "MCL38",
         colors: "#FF8700",
-        specs: ["Turbo-Hybrid V6", "ERS Mercedes", "Papaya Aero", "Top Speed 348 km/h"]
+        specs: ["Hybrid V6", "ERS Mercedes", "Papaya Aero", "Top Speed 348 km/h"]
     },
     astonmartin: {
         name: "Aston Martin Aramco",
@@ -323,16 +331,16 @@ const TEAM_DATA = {
         engine: "Mercedes PU",
         car: "AMR25",
         colors: "#006F62",
-        specs: ["Turbo-Hybrid V6", "Arrowhead Aero", "Top Speed 347 km/h"]
+        specs: ["Hybrid V6", "Green Aero", "Top Speed 347 km/h"]
     },
     rb: {
         name: "Visa CashApp RB",
         drivers: ["Ricciardo", "Tsunoda"],
         principal: "Laurent Mekies",
         engine: "Honda RBPT",
-        car: "VCARB 01",
+        car: "VCARB-01",
         colors: "#2B2D42",
-        specs: ["Turbo-Hybrid V6", "Sister Team", "Top Speed 344 km/h"]
+        specs: ["Hybrid V6", "Sister Team", "Top Speed 344 km/h"]
     },
     haas: {
         name: "Haas F1 Team",
@@ -341,7 +349,7 @@ const TEAM_DATA = {
         engine: "Ferrari PU",
         car: "VF-25",
         colors: "#B7B7B7",
-        specs: ["Turbo-Hybrid V6", "Budget Development", "Top Speed 340 km/h"]
+        specs: ["Hybrid V6", "Budget Development", "Top Speed 340 km/h"]
     },
     williams: {
         name: "Williams Racing",
@@ -350,7 +358,7 @@ const TEAM_DATA = {
         engine: "Mercedes PU",
         car: "FW47",
         colors: "#005AFF",
-        specs: ["Turbo-Hybrid V6", "Blue Aero", "Top Speed 346 km/h"]
+        specs: ["Hybrid V6", "Blue Aero", "Top Speed 346 km/h"]
     },
     sauber: {
         name: "Kick Sauber",
@@ -359,7 +367,7 @@ const TEAM_DATA = {
         engine: "Ferrari PU",
         car: "C45",
         colors: "#00FF9D",
-        specs: ["Turbo-Hybrid V6", "Green Livery", "Top Speed 343 km/h"]
+        specs: ["Hybrid V6", "Green Livery", "Top Speed 343 km/h"]
     },
     alpine: {
         name: "Alpine F1 Team",
@@ -368,7 +376,7 @@ const TEAM_DATA = {
         engine: "Renault E-Tech",
         car: "A525",
         colors: "#0090FF",
-        specs: ["Turbo-Hybrid V6", "French Aero", "Top Speed 345 km/h"]
+        specs: ["Hybrid V6", "French Aero", "Top Speed 345 km/h"]
     }
 };
 
