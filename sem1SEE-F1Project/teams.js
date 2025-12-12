@@ -11,3 +11,11 @@ for(i = 0; i < 5; i++){
         page.style.borderRadius = "10px";
     }
 }
+
+let cars = document.querySelectorAll(".team-card");
+
+for(let car = 0; car < 10; car++){
+    cars[car].addEventListener("click", function(){
+        
+    });
+}
