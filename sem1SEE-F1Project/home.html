@@ -93,23 +93,19 @@
                 <!-- SPEEDOMETER -->
                 <div class="speedometer-wrap">
 
-                    <svg class="speed-svg" viewBox="0 0 200 120">
-                        <defs>
-                            <linearGradient id="needleGrad" x1="0" x2="1">
-                                <stop offset="0%" stop-color="#fff"/>
-                                <stop offset="100%" stop-color="#ff1e00"/>
-                            </linearGradient>
-                        </defs>
+                    <!-- DIGITAL REV BAR -->
+<div class="revbar-container">
+    <div class="revbar-fill" id="revFill"></div>
+</div>
 
-                        <path d="M20,100 A80,80 0 0,1 180,100" fill="none" stroke="#222" stroke-width="12"/>
-                        <g id="ticks"></g>
+<div class="digital-readouts">
+    <div class="speed-digital">
+        <span id="speedVal">0</span><small> km/h</small>
+    </div>
+    <div class="gear-digital">Gear: <span id="gearVal">N</span></div>
+    <div class="rpm-digital">RPM: <span id="rpmVal">0</span></div>
+</div>
 
-                        <g id="needleGroup" transform="translate(100,100)" style="transform-origin: 100px 100px;">
-                            <line id="needle" x1="0" y1="0" x2="0" y2="-70"
-                                  stroke="url(#needleGrad)" stroke-width="4" stroke-linecap="round"/>
-                            <circle cx="0" cy="0" r="5" fill="#ff1e00"/>
-                        </g>
-                    </svg>
 
                     <div class="digital-readouts">
                         <div class="speed-digital"><span id="speedVal">0</span><small> km/h</small></div>
