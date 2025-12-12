@@ -52,7 +52,7 @@ const MAX_SPEED = 400;
 /* Team characteristics */
 const TEAMS = {
     mclaren:  { torque: 1.05, gears: 8 },
-    redbull:  { torque: 1.15, gears: 8 },
+    redbull:  { torque: 3.15, gears: 8 },
     ferrari:  { torque: 1.10, gears: 8 },
     mercedes: { torque: 1.12, gears: 8 }
 };
