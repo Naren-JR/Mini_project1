@@ -245,7 +245,8 @@ function updateTelemetry(t) {
 
     /* Need rotation fix */
     const angle = (speed / MAX_SPEED) * 180 - 90;
-    needle.style.transform = `translate(100px,100px) rotate(${angle}deg)`;
+   needle.style.transform = `rotate(${angle}deg)`;
+
 
     /* AUDIO UPDATE */
     if (audioCtx) {
@@ -329,12 +330,9 @@ resetBtn.addEventListener("click", () => {
 
 })();
 
-/* ==========================================================
-      DYNAMIC TEAM INFO PANEL — TEAM DATABASE + LOGIC
-   ========================================================== */
+/*  CLEAN TEAM INFO PANEL + ACTIVE BUTTON HIGHLIGHT */
 
 const TEAM_DATA = {
-
     redbull: {
         name: "Red Bull Racing",
         drivers: ["Max Verstappen", "Sergio Pérez"],
@@ -342,29 +340,8 @@ const TEAM_DATA = {
         engine: "Honda RBPT",
         car: "RB21",
         colors: "#1E5BC6",
-        specs: [
-            "Turbo-Hybrid V6",
-            "ERS: 160hp Assist",
-            "Weight: 798kg",
-            "Top Speed: 355 km/h"
-        ]
+        specs: ["Turbo-Hybrid V6", "ERS: 160hp Assist", "Weight: 798kg", "Top Speed: 355 km/h"]
     },
-
-    mercedes: {
-        name: "Mercedes-AMG Petronas",
-        drivers: ["Lewis Hamilton", "George Russell"],
-        principal: "Toto Wolff",
-        engine: "Mercedes PU106B",
-        car: "W16",
-        colors: "#00D2BE",
-        specs: [
-            "Turbo-Hybrid V6",
-            "Zero-Pod Aero Philosophy",
-            "ERS: High Efficiency Unit",
-            "Top Speed: 350 km/h"
-        ]
-    },
-
     ferrari: {
         name: "Scuderia Ferrari",
         drivers: ["Charles Leclerc", "Carlos Sainz"],
@@ -372,14 +349,17 @@ const TEAM_DATA = {
         engine: "Ferrari 066/10",
         car: "SF-25",
         colors: "#DC0000",
-        specs: [
-            "Turbo-Hybrid V6",
-            "ERS: Ferrari MGU-K",
-            "Top Speed: 350 km/h",
-            "High Downforce Aero"
-        ]
+        specs: ["Turbo-Hybrid V6", "Ferrari MGU-K ERS", "High Downforce", "Top Speed: 350 km/h"]
     },
-
+    mercedes: {
+        name: "Mercedes-AMG Petronas",
+        drivers: ["Lewis Hamilton", "George Russell"],
+        principal: "Toto Wolff",
+        engine: "Mercedes PU106B",
+        car: "W16",
+        colors: "#00D2BE",
+        specs: ["Turbo-Hybrid V6", "Ultra Efficient ERS", "Zero-Pod Aero", "Top Speed: 350 km/h"]
+    },
     mclaren: {
         name: "McLaren F1 Team",
         drivers: ["Lando Norris", "Oscar Piastri"],
@@ -387,14 +367,8 @@ const TEAM_DATA = {
         engine: "Mercedes PU",
         car: "MCL38",
         colors: "#FF8700",
-        specs: [
-            "Turbo-Hybrid V6",
-            "Orange Papaya Livery",
-            "Top Speed: 348 km/h",
-            "ERS: Mercedes System"
-        ]
+        specs: ["Turbo-Hybrid V6", "ERS: Mercedes", "Papaya Aero", "Top Speed: 348 km/h"]
     },
-
     astonmartin: {
         name: "Aston Martin Aramco",
         drivers: ["Fernando Alonso", "Lance Stroll"],
@@ -402,13 +376,8 @@ const TEAM_DATA = {
         engine: "Mercedes PU",
         car: "AMR25",
         colors: "#006F62",
-        specs: [
-            "Turbo-Hybrid V6",
-            "Green Arrowhead Aero",
-            "Top Speed: 347 km/h"
-        ]
+        specs: ["Turbo-Hybrid V6", "Green Arrowhead Aero", "Top Speed: 347 km/h"]
     },
-
     rb: {
         name: "Visa CashApp RB",
         drivers: ["Daniel Ricciardo", "Yuki Tsunoda"],
@@ -416,13 +385,8 @@ const TEAM_DATA = {
         engine: "Honda RBPT",
         car: "VCARB 01",
         colors: "#2B2D42",
-        specs: [
-            "Turbo-Hybrid V6",
-            "Sister Team to Red Bull",
-            "Top Speed: 344 km/h"
-        ]
+        specs: ["Turbo-Hybrid V6", "Sister Team to Red Bull", "Top Speed: 344 km/h"]
     },
-
     haas: {
         name: "Haas F1 Team",
         drivers: ["Nico Hülkenberg", "Kevin Magnussen"],
@@ -430,13 +394,8 @@ const TEAM_DATA = {
         engine: "Ferrari PU",
         car: "VF-25",
         colors: "#B7B7B7",
-        specs: [
-            "Turbo-Hybrid V6",
-            "Budget-Limited Aero",
-            "Top Speed: 340 km/h"
-        ]
+        specs: ["Turbo-Hybrid V6", "Budget Aero", "Top Speed: 340 km/h"]
     },
-
     williams: {
         name: "Williams Racing",
         drivers: ["Alex Albon", "Logan Sargeant"],
@@ -444,27 +403,17 @@ const TEAM_DATA = {
         engine: "Mercedes PU",
         car: "FW47",
         colors: "#005AFF",
-        specs: [
-            "Turbo-Hybrid V6",
-            "Blue Premium Aero",
-            "Top Speed: 346 km/h"
-        ]
+        specs: ["Turbo-Hybrid V6", "Blue Aero Package", "Top Speed: 346 km/h"]
     },
-
     sauber: {
-        name: "Stake F1 Team Kick Sauber",
+        name: "Kick Sauber",
         drivers: ["Valtteri Bottas", "Zhou Guanyu"],
         principal: "Andreas Seidl",
         engine: "Ferrari PU",
         car: "C45",
         colors: "#00FF9D",
-        specs: [
-            "Turbo-Hybrid V6",
-            "Green/Black Livery",
-            "Top Speed: 343 km/h"
-        ]
+        specs: ["Turbo-Hybrid V6", "Green/Black Livery", "Top Speed: 343 km/h"]
     },
-
     alpine: {
         name: "Alpine F1 Team",
         drivers: ["Pierre Gasly", "Esteban Ocon"],
@@ -472,42 +421,43 @@ const TEAM_DATA = {
         engine: "Renault E-Tech",
         car: "A525",
         colors: "#0090FF",
-        specs: [
-            "Turbo-Hybrid V6",
-            "French Racing Blue",
-            "Top Speed: 345 km/h"
-        ]
+        specs: ["Turbo-Hybrid V6", "French Aero", "Top Speed: 345 km/h"]
     }
 };
 
-
-/* HANDLE BUTTON CLICKS */
 const teamButtons = document.querySelectorAll(".team-buttons button");
 const teamCard = document.getElementById("teamCard");
 
 teamButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-        const key = btn.dataset.team;
-        const t = TEAM_DATA[key];
 
-        if (!t) return;
+        /* ACTIVE BUTTON HIGHLIGHT */
+        teamButtons.forEach(b => b.classList.remove("active-team"));
+        btn.classList.add("active-team");
 
-        /* Update card content */
+        const team = TEAM_DATA[btn.dataset.team];
+
         teamCard.innerHTML = `
-            <h3>${t.name}</h3>
-            <p><strong>Drivers:</strong> ${t.drivers.join(", ")}</p>
-            <p><strong>Engine:</strong> ${t.engine}</p>
-            <p><strong>Car:</strong> ${t.car}</p>
-            <p><strong>Team Principal:</strong> ${t.principal}</p>
-            <p><strong>Specs:</strong></p>
-            <ul>
-                ${t.specs.map(s => `<li>${s}</li>`).join("")}
-            </ul>
+            <h3>${team.name}</h3>
+
+            <div class="section-title">Drivers</div>
+            <p>${team.drivers.join(", ")}</p>
+
+            <div class="section-title">Car</div>
+            <p>${team.car}</p>
+
+            <div class="section-title">Engine</div>
+            <p>${team.engine}</p>
+
+            <div class="section-title">Team Principal</div>
+            <p>${team.principal}</p>
+
+            <div class="section-title">Specifications</div>
+            <ul>${team.specs.map(s => `<li>${s}</li>`).join("")}</ul>
         `;
 
-        /* Team color animation */
-        teamCard.style.backgroundColor = t.colors;
-        teamCard.style.borderColor = t.colors;
+        teamCard.style.backgroundColor = team.colors + "AA"; /* translucent */
+        teamCard.style.borderColor = team.colors;
     });
 });
 
