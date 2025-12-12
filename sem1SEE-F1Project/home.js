@@ -83,24 +83,67 @@ const TIMING = {
 let audioCtx = null, osc = null, noise = null, noiseGen = null, filter = null, master = null;
 
 /* Special sound bursts */
+/* ===========================================================
+   REALISTIC F1 GEARSHIFT SOUND (EXHAUST + PRESSURE POP)
+   =========================================================== */
 function playGearshift() {
     if (!audioCtx) return;
 
-    const burst = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
+    /* --- 1. LOW-FREQUENCY PRESSURE THUMP --- */
+    const thumpOsc = audioCtx.createOscillator();
+    const thumpGain = audioCtx.createGain();
 
-    burst.type = "square";
-    burst.frequency.value = 400;
+    thumpOsc.type = "sine";
+    thumpOsc.frequency.value = 65;  // deep exhaust resonance
+    thumpGain.gain.value = 0.9;
 
-    gain.gain.value = 0.6;
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+    thumpOsc.connect(thumpGain);
+    thumpGain.connect(audioCtx.destination);
 
-    burst.connect(gain);
-    gain.connect(audioCtx.destination);
+    thumpGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
 
-    burst.start();
-    burst.stop(audioCtx.currentTime + 0.15);
+    thumpOsc.start();
+    thumpOsc.stop(audioCtx.currentTime + 0.13);
+
+    /* --- 2. EXHAUST CRACK (white noise burst) --- */
+    const crackBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.15, audioCtx.sampleRate);
+    const crackData = crackBuffer.getChannelData(0);
+    for (let i = 0; i < crackData.length; i++) {
+        crackData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / crackData.length, 1.8);
+    }
+
+    const crackSource = audioCtx.createBufferSource();
+    crackSource.buffer = crackBuffer;
+
+    const crackGain = audioCtx.createGain();
+    crackGain.gain.value = 1.8; // high power pop
+    crackGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+
+    crackSource.connect(crackGain);
+    crackGain.connect(audioCtx.destination);
+
+    crackSource.start();
+
+    /* --- 3. SHORT “PSHH” PRESSURE RELEASE (wastegate-like) --- */
+    const gaspBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.20, audioCtx.sampleRate);
+    const gaspData = gaspBuffer.getChannelData(0);
+    for (let i = 0; i < gaspData.length; i++) {
+        gaspData[i] = (Math.random() * 2 - 1) * (0.5 * (1 - i / gaspData.length));
+    }
+
+    const gaspSource = audioCtx.createBufferSource();
+    gaspSource.buffer = gaspBuffer;
+
+    const gaspGain = audioCtx.createGain();
+    gaspGain.gain.value = 0.7;
+    gaspGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
+
+    gaspSource.connect(gaspGain);
+    gaspGain.connect(audioCtx.destination);
+
+    gaspSource.start();
 }
+
 
 function playBurnout() {
     if (!audioCtx) return;
