@@ -69,6 +69,10 @@ nav button{
 }
 
 
+nav a{
+    text-decoration: none;
+    color: inherit;
+}
 
 /* Form CSS */
 
