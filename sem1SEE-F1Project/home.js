@@ -328,3 +328,186 @@ resetBtn.addEventListener("click", () => {
 });
 
 })();
+
+/* ==========================================================
+      DYNAMIC TEAM INFO PANEL — TEAM DATABASE + LOGIC
+   ========================================================== */
+
+const TEAM_DATA = {
+
+    redbull: {
+        name: "Red Bull Racing",
+        drivers: ["Max Verstappen", "Sergio Pérez"],
+        principal: "Christian Horner",
+        engine: "Honda RBPT",
+        car: "RB21",
+        colors: "#1E5BC6",
+        specs: [
+            "Turbo-Hybrid V6",
+            "ERS: 160hp Assist",
+            "Weight: 798kg",
+            "Top Speed: 355 km/h"
+        ]
+    },
+
+    mercedes: {
+        name: "Mercedes-AMG Petronas",
+        drivers: ["Lewis Hamilton", "George Russell"],
+        principal: "Toto Wolff",
+        engine: "Mercedes PU106B",
+        car: "W16",
+        colors: "#00D2BE",
+        specs: [
+            "Turbo-Hybrid V6",
+            "Zero-Pod Aero Philosophy",
+            "ERS: High Efficiency Unit",
+            "Top Speed: 350 km/h"
+        ]
+    },
+
+    ferrari: {
+        name: "Scuderia Ferrari",
+        drivers: ["Charles Leclerc", "Carlos Sainz"],
+        principal: "Fred Vasseur",
+        engine: "Ferrari 066/10",
+        car: "SF-25",
+        colors: "#DC0000",
+        specs: [
+            "Turbo-Hybrid V6",
+            "ERS: Ferrari MGU-K",
+            "Top Speed: 350 km/h",
+            "High Downforce Aero"
+        ]
+    },
+
+    mclaren: {
+        name: "McLaren F1 Team",
+        drivers: ["Lando Norris", "Oscar Piastri"],
+        principal: "Andrea Stella",
+        engine: "Mercedes PU",
+        car: "MCL38",
+        colors: "#FF8700",
+        specs: [
+            "Turbo-Hybrid V6",
+            "Orange Papaya Livery",
+            "Top Speed: 348 km/h",
+            "ERS: Mercedes System"
+        ]
+    },
+
+    astonmartin: {
+        name: "Aston Martin Aramco",
+        drivers: ["Fernando Alonso", "Lance Stroll"],
+        principal: "Mike Krack",
+        engine: "Mercedes PU",
+        car: "AMR25",
+        colors: "#006F62",
+        specs: [
+            "Turbo-Hybrid V6",
+            "Green Arrowhead Aero",
+            "Top Speed: 347 km/h"
+        ]
+    },
+
+    rb: {
+        name: "Visa CashApp RB",
+        drivers: ["Daniel Ricciardo", "Yuki Tsunoda"],
+        principal: "Laurent Mekies",
+        engine: "Honda RBPT",
+        car: "VCARB 01",
+        colors: "#2B2D42",
+        specs: [
+            "Turbo-Hybrid V6",
+            "Sister Team to Red Bull",
+            "Top Speed: 344 km/h"
+        ]
+    },
+
+    haas: {
+        name: "Haas F1 Team",
+        drivers: ["Nico Hülkenberg", "Kevin Magnussen"],
+        principal: "Ayao Komatsu",
+        engine: "Ferrari PU",
+        car: "VF-25",
+        colors: "#B7B7B7",
+        specs: [
+            "Turbo-Hybrid V6",
+            "Budget-Limited Aero",
+            "Top Speed: 340 km/h"
+        ]
+    },
+
+    williams: {
+        name: "Williams Racing",
+        drivers: ["Alex Albon", "Logan Sargeant"],
+        principal: "James Vowles",
+        engine: "Mercedes PU",
+        car: "FW47",
+        colors: "#005AFF",
+        specs: [
+            "Turbo-Hybrid V6",
+            "Blue Premium Aero",
+            "Top Speed: 346 km/h"
+        ]
+    },
+
+    sauber: {
+        name: "Stake F1 Team Kick Sauber",
+        drivers: ["Valtteri Bottas", "Zhou Guanyu"],
+        principal: "Andreas Seidl",
+        engine: "Ferrari PU",
+        car: "C45",
+        colors: "#00FF9D",
+        specs: [
+            "Turbo-Hybrid V6",
+            "Green/Black Livery",
+            "Top Speed: 343 km/h"
+        ]
+    },
+
+    alpine: {
+        name: "Alpine F1 Team",
+        drivers: ["Pierre Gasly", "Esteban Ocon"],
+        principal: "Bruno Famin",
+        engine: "Renault E-Tech",
+        car: "A525",
+        colors: "#0090FF",
+        specs: [
+            "Turbo-Hybrid V6",
+            "French Racing Blue",
+            "Top Speed: 345 km/h"
+        ]
+    }
+};
+
+
+/* HANDLE BUTTON CLICKS */
+const teamButtons = document.querySelectorAll(".team-buttons button");
+const teamCard = document.getElementById("teamCard");
+
+teamButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        const key = btn.dataset.team;
+        const t = TEAM_DATA[key];
+
+        if (!t) return;
+
+        /* Update card content */
+        teamCard.innerHTML = `
+            <h3>${t.name}</h3>
+            <p><strong>Drivers:</strong> ${t.drivers.join(", ")}</p>
+            <p><strong>Engine:</strong> ${t.engine}</p>
+            <p><strong>Car:</strong> ${t.car}</p>
+            <p><strong>Team Principal:</strong> ${t.principal}</p>
+            <p><strong>Specs:</strong></p>
+            <ul>
+                ${t.specs.map(s => `<li>${s}</li>`).join("")}
+            </ul>
+        `;
+
+        /* Team color animation */
+        teamCard.style.backgroundColor = t.colors;
+        teamCard.style.borderColor = t.colors;
+    });
+});
+
