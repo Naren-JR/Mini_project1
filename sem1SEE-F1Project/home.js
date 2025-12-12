@@ -184,6 +184,14 @@ function playBurnout() {
     noiseGen.start();
   }
 
+   function updateArcFill(speed) {
+    const arcFill = document.getElementById("arcFill");
+    const percent = Math.min(speed / MAX_SPEED, 1);
+    const offset = 260 - (260 * percent);   // 260 = arc length
+
+    arcFill.style.strokeDashoffset = offset;
+}
+
   /* helpers: speed->rpm and rpm->freq */
   function speedToRPM(s) { return Math.round((s / MAX_SPEED) * 14000); }
   function rpmToFreq(rpm, presetName) {
@@ -229,6 +237,7 @@ function playBurnout() {
       if (gear !== "N") playGearshift();
       gear = newGear;
     }
+   updateArcFill(speed);
 
     // update UI
     speedEl.textContent = Math.round(speed);
@@ -261,8 +270,26 @@ function playBurnout() {
     requestAnimationFrame(updateStopwatch);
   }
 
+   function animateArcSweep() {
+    const sweep = document.getElementById("arcSweep");
+    const base  = document.getElementById("arcBase");
+
+    // Reset sweep
+    sweep.style.opacity = "1";
+    sweep.style.strokeDashoffset = "260";
+    sweep.style.animation = "arcSweepAnim 0.8s ease-out forwards";
+
+    // After sweep → turn arcBase gray & hide sweep
+    setTimeout(() => {
+        sweep.style.opacity = "0";
+        base.style.stroke = "#555";
+    }, 850);
+}
+
+
   /* buttons */
   startBtn.addEventListener("click", () => {
+     animateArcSweep();
     initAudio();
     audioCtx.resume();
 
