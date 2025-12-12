@@ -12,7 +12,7 @@
 
 body{
     display: grid;
-    grid-template-rows: 1fr 4fr 1fr;  /*Header      Content     Footer*/
+    grid-template-rows: auto auto auto;  /*Header      Content     Footer*/
 
     margin: 0px;
 
