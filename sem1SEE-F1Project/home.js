@@ -72,81 +72,85 @@
   /* audio nodes */
   let audioCtx = null, osc = null, filter = null, noiseGen = null, noiseGain = null, master = null;
 
-  /* -------------------------
-     SOUND: racer-style gearshift
-     Tut (short click) -> Thump -> Crack -> Pshhh
-     ------------------------- */
-  function playGearshift() {
+function playGearshift() {
     if (!audioCtx) return;
 
-    // 1) tut - short mechanical click
-    const tut = audioCtx.createOscillator();
-    const tutG = audioCtx.createGain();
-    tut.type = "square";
-    tut.frequency.value = 900;
-    tutG.gain.value = 0.0008;
-    tut.connect(tutG); tutG.connect(audioCtx.destination);
-    tutG.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.06);
-    tut.start(); tut.stop(audioCtx.currentTime + 0.07);
+    /* --------------------------------------------------------
+       GEARSHIFT SOUND = 3 PARTS
+       1) "Tut"      → quick mechanical click
+       2) "Thump"    → gearbox impact
+       3) "Crack + Pshhh" → exhaust backfire + wastegate
+       -------------------------------------------------------- */
 
-    // 2) thump - low impact
-    const thump = audioCtx.createOscillator();
-    const thumpG = audioCtx.createGain();
-    thump.type = "sine";
-    thump.frequency.value = 55;
-    thumpG.gain.value = 1.2;
-    thump.connect(thumpG); thumpG.connect(audioCtx.destination);
-    thumpG.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
-    thump.start(); thump.stop(audioCtx.currentTime + 0.13);
+    // 1) Tut — short square click
+    const tutOsc = audioCtx.createOscillator();
+    const tutGain = audioCtx.createGain();
+    tutOsc.type = "square";
+    tutOsc.frequency.value = 900;
+    tutGain.gain.value = 0.001;
+    tutOsc.connect(tutGain).connect(audioCtx.destination);
+    tutGain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.05);
+    tutOsc.start();
+    tutOsc.stop(audioCtx.currentTime + 0.06);
 
-    // 3) crack - white-noise pop (exhaust backfire)
-    const crackBuf = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.12, audioCtx.sampleRate);
-    const crackData = crackBuf.getChannelData(0);
-    for (let i = 0; i < crackData.length; i++) {
-      crackData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / crackData.length, 1.6);
+    // 2) Thump — low sine punch
+    const thumpOsc = audioCtx.createOscillator();
+    const thumpGain = audioCtx.createGain();
+    thumpOsc.type = "sine";
+    thumpOsc.frequency.value = 55;
+    thumpGain.gain.value = 1.1;
+    thumpOsc.connect(thumpGain).connect(audioCtx.destination);
+    thumpGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+    thumpOsc.start();
+    thumpOsc.stop(audioCtx.currentTime + 0.16);
+
+    // 3) Crack + Pshhh — white noise burst
+    const crackBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.18, audioCtx.sampleRate);
+    const crack = crackBuffer.getChannelData(0);
+
+    // Create white noise with fading envelope
+    for (let i = 0; i < crack.length; i++) {
+        crack[i] = (Math.random() * 2 - 1) * (1 - i / crack.length);
     }
-    const crackSrc = audioCtx.createBufferSource();
-    crackSrc.buffer = crackBuf;
-    const crackG = audioCtx.createGain();
-    crackG.gain.value = 1.9;
-    crackG.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-    crackSrc.connect(crackG); crackG.connect(audioCtx.destination);
-    crackSrc.start();
 
-    // 4) pshhh - wastegate puff (softer long tail)
-    const pBuf = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.18, audioCtx.sampleRate);
-    const pD = pBuf.getChannelData(0);
-    for (let i = 0; i < pD.length; i++) pD[i] = (Math.random() * 2 - 1) * (0.45 * (1 - i / pD.length));
-    const pSrc = audioCtx.createBufferSource();
-    pSrc.buffer = pBuf;
-    const pG = audioCtx.createGain();
-    pG.gain.value = 0.7;
-    pG.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
-    pSrc.connect(pG); pG.connect(audioCtx.destination);
-    pSrc.start();
-  }
+    const crackSource = audioCtx.createBufferSource();
+    crackSource.buffer = crackBuffer;
 
+    const crackGain = audioCtx.createGain();
+    crackGain.gain.value = 1.5;
+    crackGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
+
+    crackSource.connect(crackGain).connect(audioCtx.destination);
+    crackSource.start();
+}
+
+   
   /* -------------------------
      SOUND: burnout (tyre screech)
      ------------------------- */
-  function playBurnout() {
+function playBurnout() {
     if (!audioCtx) return;
-    const len = Math.floor(audioCtx.sampleRate * 0.5);
-    const buff = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
-    const data = buff.getChannelData(0);
+
+    const len = audioCtx.sampleRate * 0.5; // 0.5 seconds
+    const buffer = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+
+    // white noise → fades out slowly
     for (let i = 0; i < len; i++) {
-      const white = (Math.random() * 2 - 1);
-      const env = Math.pow(1 - i / len, 1.2);
-      data[i] = white * env * 1.3;
+        const fade = 1 - i / len;
+        data[i] = (Math.random() * 2 - 1) * fade * 1.4;
     }
+
     const src = audioCtx.createBufferSource();
-    src.buffer = buff;
-    const g = audioCtx.createGain();
-    g.gain.value = 1.6;
-    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
-    src.connect(g); g.connect(audioCtx.destination);
+    src.buffer = buffer;
+
+    const gain = audioCtx.createGain();
+    gain.gain.value = 1.4;
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+
+    src.connect(gain).connect(audioCtx.destination);
     src.start();
-  }
+}
 
   /* initialize audio engine (oscillator + noise) */
   function initAudio() {
