@@ -245,7 +245,7 @@ function updateTelemetry(t) {
 
     /* Need rotation fix */
     const angle = (speed / MAX_SPEED) * 180 - 90;
-   needle.style.transform = `rotate(${angle}deg)`;
+
 
 
     /* AUDIO UPDATE */
@@ -460,4 +460,19 @@ teamButtons.forEach(btn => {
         teamCard.style.borderColor = team.colors;
     });
 });
+
+const revFill = document.getElementById("revFill");
+
+/* rev bar fill percentage */
+const revPercent = rpm / 14000 * 100;
+revFill.style.width = `${revPercent}%`;
+
+/* color zones */
+if (revPercent < 40) {
+    revFill.style.backgroundColor = "#00ff00"; // green
+} else if (revPercent < 80) {
+    revFill.style.backgroundColor = "#ffcc00"; // yellow
+} else {
+    revFill.style.backgroundColor = "#ff1e00"; // red
+}
 
