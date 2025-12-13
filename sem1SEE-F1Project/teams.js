@@ -66,39 +66,39 @@ function mclaren(){
 }
 
 function ferarri(){
-    carClick(document.getElementById("r1c2"), "#ED1131ed", "#ff0026ff", "#ED1131ba");
+    carClick(document.getElementById("r1c2"), "#ED1131ed", "##ED1131", "#ED1131ba");
 }
 
 function mercedes(){
-    carClick(document.getElementById("r2c1"), "#C8CCCEed", "#c8ccceff", "#C8CCCEba");
+    carClick(document.getElementById("r2c1"), "#00D7B6ed", "#00D7B6", "#00f1cdc9");
 }
 
 function redbull(){
-    carClick(document.getElementById("r2c2"), "#4781D7ed", "#4590ffff", "#4781D7ba");
+    carClick(document.getElementById("r2c2"), "#4781D7ed", "#4781D7", "#4781D7ba");
 }
 
 function aston(){
-    carClick(document.getElementById("r3c1"), "#037a68ff", "#00d1b1ff", "#037A68ba");
+    carClick(document.getElementById("r3c1"), "#229971ed", "#229971", "#229971ba");
 }
 
 function racingbull(){
-    carClick(document.getElementById("r3c2"), "#6C98FFed", "#3a75ffff", "#6C98FFba");
+    carClick(document.getElementById("r3c2"), "#6C98FFed", "#6C98FF", "#6C98FFba");
 }
 
 function williams(){
-    carClick(document.getElementById("r4c1"), "#1868DBed", "#006affff", "#1868DBba");
+    carClick(document.getElementById("r4c1"), "#1868DBed", "#1868DB", "#1868DBba");
 }
 
 function alpine(){
-    carClick(document.getElementById("r4c2"), "#00A1E8ed", "#00b3ffff", "#00A1E8ba");
+    carClick(document.getElementById("r4c2"), "#00A1E8ed", "#00A1E8", "#00A1E8ba");
 }
 
 function haas(){
-    carClick(document.getElementById("r5c1"), "#9C9FA2ed", "#9c9fa2ff", "#9C9FA2ba");
+    carClick(document.getElementById("r5c1"), "#9C9FA2ed", "#9C9FA2", "#9C9FA2ba");
 }
 
 function sauber(){
-    carClick(document.getElementById("r5c2"), "#01C00Eed", "#00e30fff", "#01C00Eba");
+    carClick(document.getElementById("r5c2"), "#01C00Eed", "##01C00E", "#01C00Eba");
 }
 
 
