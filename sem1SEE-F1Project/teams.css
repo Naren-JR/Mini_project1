@@ -189,49 +189,50 @@ a{
 
 #r1c1:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #ff7b00;
 }
+
 #r1c2:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #ff0026ff;
 }
 
 #r2c1:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #c8ccceff;
 }
 #r2c2:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #4590ffff;
 }
 
 
 #r3c1:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #00a48cff;
 }
 #r3c2:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #3a75ffff;
 }
   
 
 #r4c1:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #006affff;
 }
 #r4c2:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #00b3ffff;
 }
 
 #r5c1:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #9c9fa2ff;
 }
 #r5c2:hover {
 
-    transform: scale(110%);
+    box-shadow: 0 0 15px #00e30fff;
 }
 
 .team-card{
