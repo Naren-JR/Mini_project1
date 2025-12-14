@@ -103,7 +103,7 @@ a{
     
     display: grid;
     grid-template-columns: 1fr 1fr 1.5fr;
-    grid-template-rows: auto auto auto auto auto;
+    grid-auto-rows: minmax(200px, auto);
 }
 
 #main button{
@@ -222,7 +222,7 @@ a{
     height: calc(100vh - 160px);
     border-radius: 50px;
     top: 130px;
-    position: relative; 
+    position: sticky; 
     overflow: hidden;
 }
 
@@ -236,16 +236,6 @@ a{
     transform: translateY(0);
     pointer-events: auto;
 }
-
-#driversCol{
-    grid-column: 1 / span 2;
-    overflow-y: auto;
-    max-height: calc(100vh - 160px);
-    padding-right: 10px;
-}
-
-
-
 
 #title{
     position: absolute;
