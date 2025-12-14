@@ -175,45 +175,32 @@ a{
 
     width: 90%;
 }
+#driversCol{
+    grid-column: 1 / span 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
 
-#r1c1 { grid-row: 1; grid-column: 1; }
-#r1c2 { grid-row: 1; grid-column: 2; }
 .mclaren { background-image: linear-gradient(125deg,rgba(163, 79, 0, 1) 10%, rgba(244, 118, 0, 1) 50%); }
 
-#r2c1 { grid-row: 2; grid-column: 1; }
-#r2c2 { grid-row: 2; grid-column: 2; }
 .ferarri {background-image: linear-gradient(125deg,rgba(113, 0, 6, 1) 10%, rgba(201, 0, 10, 1) 50%);}
 
-#r3c1 { grid-row: 3; grid-column: 1; }
-#r3c2 { grid-row: 3; grid-column: 2; }
 .mercedes {background-image: linear-gradient(125deg,rgba(0, 117, 96, 1) 10%, rgba(0, 240, 196, 1) 50%);}
 
-#r4c1 { grid-row: 4; grid-column: 1; }
-#r4c2 { grid-row: 4; grid-column: 2; }
 .redbull {background-image: linear-gradient(125deg,rgba(0, 59, 148, 1) 10%, rgba(71, 129, 215, 1) 50%);}
 
-#r5c1 { grid-row: 5; grid-column: 1; }
-#r5c2 { grid-row: 5; grid-column: 2; }
 .aston {background-image: linear-gradient(125deg,rgba(0, 117, 78, 1) 10%, rgba(41, 207, 151, 1) 50%);}
-
-#r6c1 { grid-row: 6; grid-column: 1; }
-#r6c2 { grid-row: 6; grid-column: 2; }
 .racingbull {background-image: linear-gradient(125deg,rgba(56, 78, 130, 1) 10%, rgba(108, 152, 255, 1) 50%);}
 
-#r7c1 { grid-row: 7; grid-column: 1; }
-#r7c2 { grid-row: 7; grid-column: 2; }
 .williams {background-image: linear-gradient(125deg,rgba(15, 60, 122, 1) 10%, rgba(18, 115, 252, 1) 50%);}
 
-#r8c1 { grid-row: 8; grid-column: 1; }
-#r8c2 { grid-row: 8; grid-column: 2; }
 .alpine {background-image: linear-gradient(125deg,rgba(1, 93, 133, 1) 10%, rgba(0, 161, 232, 1) 50%);}
 
-#r9c1 { grid-row: 9; grid-column: 1; }
-#r9c2 { grid-row: 9; grid-column: 2; }
 .haas {background-image: linear-gradient(125deg,rgba(86, 86, 87, 1) 10%, rgba(156, 159, 162, 1) 50%);}
 
-#r10c1 { grid-row: 10; grid-column: 1; }
-#r10c2 { grid-row: 10; grid-column: 2; }
 .sauber {background-image: linear-gradient(125deg,rgba(2, 92, 8, 1) 10%, rgba(2, 214, 16, 1) 50%);}
 
 #statsBox{
