@@ -132,7 +132,9 @@ a{
 
     justify-items: left;
     padding-left: 20px;
-    color: white
+    color: white;
+
+    margin-bottom: 20px;
 }
 
 .num{
@@ -141,8 +143,6 @@ a{
 
     justify-self: left;
     padding-left: 20px;
-
-    padding-top: 15px;
 }
 
 .dN{
