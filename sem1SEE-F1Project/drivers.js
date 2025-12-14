@@ -245,9 +245,54 @@ for(i = 0; i < 5; i++){
         }
     };
 
-  const buttons = document.querySelectorAll(".driver-card button");
-  const card = document.getElementById("statsBox");
+ // const buttons = document.querySelectorAll(".driver-card button");
+  //const card = document.getElementById("statsBox");
+  const cards = document.querySelectorAll(".driver-card");
+  const statsBox = document.getElementById("statsBox");
 
+  const fN = document.querySelector(".fN");
+  const lN = document.querySelector(".lN");
+  const cN = document.querySelector(".cN");
+  const tN = document.querySelector(".tN");
+  const nN = document.querySelector(".nN");
 
+  const sPos = document.querySelector("#sPos .num");
+  const sPoints = document.querySelector("#sPoints .num");
+  const sWins = document.querySelector("#sWins .num");
+  const sPods = document.querySelector("#sPods .num");
+
+  const titleImg = document.getElementById("driver-title");
+  const title = document.getElementById("title");
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+
+      // driver key is last word of id
+      const key = card.id.split(" ").pop();
+      const data = drivers[key];
+
+      if (!data) return;
+
+      // split first & last name
+      const [first, ...last] = data.name.split(" ");
+
+      fN.textContent = first;
+      lN.textContent = last.join(" ");
+      cN.textContent = data.country;
+      tN.textContent = data.team;
+      nN.textContent = data.number;
+
+      sPos.textContent = data.seasonPos;
+      sPoints.textContent = data.seasonPoints;
+      sWins.textContent = data.seasonWins;
+      sPods.textContent = data.seasonPodis;
+      title.style.background = data.color;
+
+      // update image
+      const img = card.querySelector(".driver").src;
+      titleImg.src = img;
+
+    });
+  });
 
 })();
