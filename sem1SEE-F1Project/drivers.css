@@ -220,14 +220,19 @@ a{
 
     margin: 25px 0px 10px 50px;
     height: calc(100vh - 160px);
-
     border-radius: 50px;
     position: sticky;
     top: 130px;
-
+    position: relative; 
     overflow: hidden;
 }
-  #statsBox:hover #stats{
+
+
+#statsBox:hover #title{
+    opacity: 0.15;   /* image becomes transparent */
+}
+
+#statsBox:hover #stats{
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -236,13 +241,21 @@ a{
 
 
 
+
 #title{
-    height: 55%;
+    position: absolute;
+    inset: 0;
+
     background-image: linear-gradient(180deg,rgba(163,79,0,1) 0%, rgb(255,123,0) 50%);
+    border-radius: 50px;
+
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto auto;
+
+    transition: opacity 0.35s ease;
 }
+
 
 
 #title p {
@@ -306,16 +319,14 @@ a{
 #title-img{
     grid-row: 1 / span 4;
     grid-column: 2;
-
-    overflow: hidden;
 }
 
 #title-img img{
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    transform: none;
+    object-fit: cover;
 }
+
 
 
 
@@ -323,24 +334,24 @@ a{
 
 #stats{
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 45%;
+    inset: 0;
 
     background-color: #373747;
+    border-radius: 50px;
 
+    display: grid;
+    grid-template-rows: min-content auto;
     font-family: "Audiowide";
 
     opacity: 0;
-    transform: translateY(100%);
     pointer-events: none;
+    transform: translateY(30px);
 
     transition: opacity 0.35s ease,
                 transform 0.35s ease;
 }
 
-  #title:hover + #stats,
+
 
 
 #stats>p {
