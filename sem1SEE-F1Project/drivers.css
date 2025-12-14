@@ -237,6 +237,12 @@ a{
     pointer-events: auto;
 }
 
+#driversCol{
+    grid-column: 1 / span 2;
+    overflow-y: auto;
+    max-height: calc(100vh - 160px);
+    padding-right: 10px;
+}
 
 
 
