@@ -107,3 +107,124 @@ footer{
     text-align: right;
     font-size: 14px;
 }
+
+/* =======================
+   RACES PAGE LAYOUT
+======================= */
+
+.races-layout {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* LEFT LIST */
+.race-list {
+    background: rgba(255,255,255,0.04);
+    border: 2px solid #ff1e00;
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.race-list h2 {
+    margin-bottom: 15px;
+}
+
+.race-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.race-list li {
+    padding: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: 0.25s ease;
+}
+
+.race-list li:hover,
+.race-list li.active {
+    background: rgba(255,30,0,0.15);
+    border-left: 4px solid #ff1e00;
+}
+
+/* RIGHT PANEL */
+.race-details {
+    background: rgba(0,0,0,0.35);
+    border: 2px solid #ff1e00;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+/* TRACK IMAGE */
+.track-image {
+    width: 100%;
+    max-width: 520px;
+    margin: 15px 0;
+    transition: filter 0.6s ease;
+}
+
+.track-image.active {
+    filter:
+        drop-shadow(0 0 12px #ff1e00)
+        drop-shadow(0 0 30px rgba(255,30,0,0.6));
+}
+
+/* MAP */
+.map-box {
+    position: relative;
+    margin-top: 20px;
+}
+
+.map-box img {
+    width: 100%;
+    opacity: 0.75;
+}
+
+#mapPin {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #ff1e00;
+    border-radius: 50%;
+    box-shadow: 0 0 18px #ff1e00;
+    transform: translate(-50%, -50%);
+}
+
+/* STATS */
+.track-stats {
+    margin-top: 15px;
+    background: rgba(0,0,0,0.35);
+    padding: 15px;
+    border-left: 4px solid #ff1e00;
+}
+
+.track-stats p {
+    margin: 6px 0;
+}
+
+/* SCHEDULE */
+.schedule {
+    margin-top: 18px;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+
+.schedule ul {
+    padding-left: 18px;
+}
+
+.schedule li {
+    margin-bottom: 6px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .races-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
