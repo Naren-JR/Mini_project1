@@ -24,7 +24,58 @@
         <button id="visit"><a href="visit.html">Visit</a></button>
     </nav>
 </header>
+<div id="main">
+    <div class="races-layout">
 
+    <!-- LEFT: CIRCUIT LIST -->
+    <aside class="race-list">
+        <h2>F1 Circuits</h2>
+        <ul id="circuitList">
+            <li data-key="monza">Monza</li>
+            <li data-key="silverstone">Silverstone</li>
+            <li data-key="spa">Spa-Francorchamps</li>
+            <li data-key="monaco">Monaco</li>
+            <li data-key="suzuka">Suzuka</li>
+            <li data-key="interlagos">Interlagos</li>
+            <li data-key="melbourne">Melbourne</li>
+            <li data-key="bahrain">Bahrain</li>
+        </ul>
+    </aside>
+
+    <!-- RIGHT: DETAILS -->
+    <section class="race-details">
+
+        <h2 id="trackName">Select a Circuit</h2>
+
+        <img id="trackImg" class="track-image"
+             src=""
+             alt="F1 Track Layout">
+
+        <!-- MAP -->
+        <div class="map-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg">
+            <div id="mapPin"></div>
+        </div>
+
+        <!-- STATS -->
+        <div class="track-stats" id="trackStats">
+            <p>Select a circuit to view details.</p>
+        </div>
+
+        <!-- WEEKEND FORMAT -->
+        <div class="schedule">
+            <h4>Race Weekend Format</h4>
+            <ul>
+                <li>Friday – Practice Sessions</li>
+                <li>Saturday – Qualifying</li>
+                <li>Sunday – Race</li>
+            </ul>
+        </div>
+
+    </section>
+
+  </div>
+</div>
 
 
 
