@@ -1,1 +1,109 @@
+.racing-sans-one-regular {
+  font-family: "Racing Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
+.titillium-web-regular {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body{
+    display: grid;
+    grid-template-rows: auto auto auto;  /*Header      Content     Footer*/
+
+    margin: 0px;
+
+    font-size: 16px;
+    font-family: "Racing Sans One";
+    background-color: #15151E;
+    color: white;
+}
+
+header{
+    height: 80px;
+    width: auto;
+
+    grid-row: 1;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+
+    border-bottom: 2px solid #ff1e00;
+    padding: 0 20px;
+    box-sizing: border-box;
+    width: 100%;
+
+
+    align-items: center;
+
+    margin-bottom: 50px;
+}
+
+header img{
+    justify-self: flex-start;
+
+    width: 10%;
+
+}
+
+nav{
+    display: inline-flex;
+    flex: 1;
+
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 50px;
+
+    margin: 0px auto 0px auto;
+}
+
+nav button{
+    background-color: #15151E;
+    color: white;
+    border: none;
+
+    font-family: "Racing Sans One";
+    font-size: 24px;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+#main{
+
+    margin: 10px 50px;
+}
+
+footer{
+    border-top: 2px solid #ff1e00;
+    margin-top: 50px;
+
+    height: 80px;
+    width: 100%;
+
+    grid-row: 3;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content {
+    flex-wrap: wrap;
+    width: 90%;
+    margin: auto;
+}
+
+.footer-right {
+    text-align: right;
+    font-size: 14px;
+}
