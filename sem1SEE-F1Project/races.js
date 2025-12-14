@@ -23,7 +23,7 @@ const CIRCUITS = {
         country: "Italy",
         races: 74,
         lap: "1:21.046",
-        image: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Monza_track_map.svg"
+        image: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Monza_track_map.svg"
     },
     silverstone: {
         name: "Silverstone Circuit",
@@ -51,14 +51,14 @@ const CIRCUITS = {
         country: "Japan",
         races: 35,
         lap: "1:30.983",
-        image: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Suzuka_circuit_map--2005.svg"
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Suzuka_circuit_map--2005.svg"
     },
     interlagos: {
         name: "Interlagos",
         country: "Brazil",
         races: 50,
         lap: "1:10.540",
-        image: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Interlagos_track_map.svg"
+        image: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Circuit_Interlagos_1977.svg"
     },
     melbourne: {
         name: "Albert Park Circuit",
