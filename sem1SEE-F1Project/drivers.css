@@ -217,20 +217,20 @@ a{
 #statsBox{
     grid-column: 3;
     grid-row: 1 / span 10;
-
     margin: 25px 0px 10px 50px;
-
     width: auto;
     height: calc(100vh - 160px);
 
     border-radius: 50px;
-
-    top: 130px;
     position: sticky;
+    top: 130px;
 
     display: grid;
     grid-template-rows: auto 1fr;
+    overflow: hidden;  
+    cursor: pointer;  
 }
+
 
 #title{
     grid-row: 1;
@@ -329,11 +329,22 @@ a{
 
     display: grid;
     grid-template-rows: min-content auto;
-    
-    overflow-y: auto;
-    overflow-x: hidden;
+
     font-family: "Audiowide";
+    opacity: 0;
+    transform: translateY(30px);
+    pointer-events: none;
+
+     transition: opacity 0.35s ease 0.1s,
+                transform 0.35s ease 0.1s;
 }
+
+  #statsBox:hover #stats{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
 
 #stats>p {
     margin: 25px 0px 10px 25px;
