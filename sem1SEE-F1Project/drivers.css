@@ -219,31 +219,44 @@ a{
     grid-row: 1 / span 10;
 
     margin: 25px 0px 10px 50px;
-
-    width: auto;
     height: calc(100vh - 160px);
-
     border-radius: 50px;
-
-    top: 130px;
     position: sticky;
-
-    display: grid;
-    grid-template-rows: auto 1fr;
+    top: 130px;
+    position: relative; 
+    overflow: hidden;
 }
 
-#title{
-    grid-row: 1;
 
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    background-image: linear-gradient(180deg,rgba(163, 79, 0, 1) 0%, rgb(255, 123, 0) 50%);
+#statsBox:hover #title{
+    opacity: 0.15;   /* image becomes transparent */
+}
+
+#statsBox:hover #stats{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+
+
+
+
+#title{
+    position: absolute;
+    inset: 0;
+
+    background-image: linear-gradient(180deg,rgba(163,79,0,1) 0%, rgb(255,123,0) 50%);
+    border-radius: 50px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto auto;
-    overflow: hidden;
+
+    transition: opacity 0.35s ease;
 }
+
+
 
 #title p {
     margin: 0;
@@ -306,39 +319,49 @@ a{
 #title-img{
     grid-row: 1 / span 4;
     grid-column: 2;
-
-    overflow: hidden;
 }
 
 #title-img img{
-    width: 90%;
-
-    justify-items: center;
-
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    transform: translateY(50px);
 }
+
+
 
 
 
 
 #stats{
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    position: absolute;
+    inset: 0;
+
     background-color: #373747;
+    border-radius: 50px;
 
     display: grid;
     grid-template-rows: min-content auto;
-    
-    overflow-y: auto;
-    overflow-x: hidden;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+
     font-family: "Audiowide";
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(30px);
+
+    transition: opacity 0.35s ease,
+                transform 0.35s ease;
 }
 
-#stats>p {
-    margin: 25px 0px 10px 25px;
 
+
+
+
+#stats>p {
     font-family: "Audiowide";
+   margin: 20px 0;
     font-size: 25px;
 }
 
@@ -346,8 +369,8 @@ a{
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
-
-    margin: 25px;
+    gap: 20px;
+    place-items: center;
 }
 
 #sPos{
