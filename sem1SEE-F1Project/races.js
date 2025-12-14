@@ -94,8 +94,8 @@ buttons.forEach(btn => {
 
         imgEl.classList.remove("show");
         imgEl.src = data.image;
+        imgEl.classList.add("show");
 
-        setTimeout(() => imgEl.classList.add("show"), 50);
 
         infoEl.innerHTML = `
             <p><strong>Country:</strong> ${data.country}</p>
