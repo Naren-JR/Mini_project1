@@ -30,7 +30,7 @@ const CIRCUITS = {
         country: "United Kingdom",
         races: 58,
         lap: "1:27.097",
-        image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Silverstone_Circuit_2020.png"
+        image: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Silverstone_Circuit_moto_intl_pits.svg"
     },
     spa: {
         name: "Circuit de Spa-Francorchamps",
