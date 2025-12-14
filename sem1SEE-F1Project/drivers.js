@@ -180,7 +180,7 @@ for(i = 0; i < 5; i++){
             country: "France",
             team: "Alpine",
             number: "10",
-            color: "linear-gradient(180deg,,rgba(1, 93, 133, 1) 5%, rgba(0, 179, 255, 1) 50%);",
+            color: "linear-gradient(180deg,rgba(1, 93, 133, 1) 5%, rgba(0, 179, 255, 1) 50%);",
             seasonWins: 0,
             seasonPodis: 0,
             seasonPos: "20th",
@@ -191,7 +191,7 @@ for(i = 0; i < 5; i++){
             country: "Argentina",
             team: "Alpine",
             number: "43",
-            color: "linear-gradient(180deg,,rgba(1, 93, 133, 1) 5%, rgba(0, 179, 255, 1) 50%);",
+            color: "linear-gradient(180deg,rgba(1, 93, 133, 1) 5%, rgba(0, 179, 255, 1) 50%);",
             seasonWins: 0,
             seasonPodis: 0,
             seasonPos: "18th",
@@ -248,7 +248,6 @@ for(i = 0; i < 5; i++){
  // const buttons = document.querySelectorAll(".driver-card button");
   //const card = document.getElementById("statsBox");
   const cards = document.querySelectorAll(".driver-card");
-  const statsBox = document.getElementById("statsBox");
 
   const fN = document.querySelector(".fN");
   const lN = document.querySelector(".lN");
@@ -261,36 +260,39 @@ for(i = 0; i < 5; i++){
   const sWins = document.querySelector("#sWins .num");
   const sPods = document.querySelector("#sPods .num");
 
-  const titleImg = document.getElementById("driver-title");
   const title = document.getElementById("title");
+  const titleImg = document.getElementById("driver-title");
 
   cards.forEach(card => {
     card.addEventListener("click", () => {
 
-      // driver key is last word of id
+      // extract driver key from id (eg: "r1c1 oscar" → "oscar")
       const key = card.id.split(" ").pop();
       const data = drivers[key];
-
       if (!data) return;
 
-      // split first & last name
-      const [first, ...last] = data.name.split(" ");
+      // name split
+      const nameParts = data.name.split(" ");
+      fN.textContent = nameParts[0];
+      lN.textContent = nameParts.slice(1).join(" ");
 
-      fN.textContent = first;
-      lN.textContent = last.join(" ");
+      // info row
       cN.textContent = data.country;
       tN.textContent = data.team;
       nN.textContent = data.number;
 
+      // season stats
       sPos.textContent = data.seasonPos;
       sPoints.textContent = data.seasonPoints;
       sWins.textContent = data.seasonWins;
       sPods.textContent = data.seasonPodis;
+
+      // background gradient
       title.style.background = data.color;
 
-      // update image
-      const img = card.querySelector(".driver").src;
-      titleImg.src = img;
+      // driver image
+      const imgEl = card.querySelector(".driver");
+      if (imgEl) titleImg.src = imgEl.src;
 
     });
   });
