@@ -221,15 +221,18 @@ a{
     margin: 25px 0px 10px 50px;
 
     width: auto;
-    height: 750px;
+    height: calc(100vh - 160px);
 
     border-radius: 50px;
 
     top: 130px;
     position: sticky;
 
+    overflow-y: auto;
+    overflow-x: hidden;
+
     display: grid;
-    grid-template-rows: 375px 375px;
+    grid-template-rows: min-content auto;
 }
 
 #title{
