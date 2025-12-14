@@ -338,29 +338,29 @@ function playBurnout() {
   const TEAM_DATA = {
     redbull: {
         name: "Red Bull Racing",
-        drivers: ["Max Verstappen", "Sergio Pérez"],
-        principal: "Christian Horner",
+        drivers: ["Max Verstappen", "Yuki Tsunoda"],
+        principal: "Laurent Mekies",
         engine: "Honda RBPT",
         car: "RB21",
-        colors: "#1E5BC6",
-        specs: ["Turbo-Hybrid V6", "ERS 160hp", "798kg", "Top Speed: 355 km/h"]
+        colors: "#4781D7",
+        specs: ["Turbo-Hybrid V6", "ERS 160hp", "798kg", "Top Speed: 362 km/h"]
     },
     ferrari: {
         name: "Scuderia Ferrari",
-        drivers: ["Charles Leclerc", "Carlos Sainz"],
+        drivers: ["Charles Leclerc", "Lewis Hamilton"],
         principal: "Fred Vasseur",
         engine: "Ferrari 066/10",
         car: "SF-25",
-        colors: "#DC0000",
+        colors: "#ED1131",
         specs: ["Turbo-Hybrid V6", "Ferrari ERS", "High Downforce", "Top Speed: 350 km/h"]
     },
     mercedes: {
         name: "Mercedes-AMG Petronas",
-        drivers: ["Lewis Hamilton", "George Russell"],
+        drivers: ["George Russell", "Kimi Antonelli"],
         principal: "Toto Wolff",
         engine: "Mercedes PU106B",
         car: "W16",
-        colors: "#00D2BE",
+        colors: "#00f1cd",
         specs: ["Hybrid V6", "Efficient ERS", "Zero-Pod Aero", "Top Speed: 350 km/h"]
     },
     mclaren: {
@@ -368,62 +368,62 @@ function playBurnout() {
         drivers: ["Lando Norris", "Oscar Piastri"],
         principal: "Andrea Stella",
         engine: "Mercedes PU",
-        car: "MCL38",
-        colors: "#FF8700",
+        car: "MCL39",
+        colors: "#F47600",
         specs: ["Turbo-Hybrid V6", "ERS Mercedes", "Papaya Aero", "Top Speed: 348 km/h"]
     },
     astonmartin: {
         name: "Aston Martin Aramco",
         drivers: ["Fernando Alonso", "Lance Stroll"],
-        principal: "Mike Krack",
+        principal: "Andy Cowell",
         engine: "Mercedes PU",
         car: "AMR25",
-        colors: "#006F62",
+        colors: "#229971",
         specs: ["Turbo-Hybrid V6", "Green Arrowhead Aero", "Top Speed: 347 km/h"]
     },
     rb: {
         name: "Visa CashApp RB",
-        drivers: ["Daniel Ricciardo", "Yuki Tsunoda"],
-        principal: "Laurent Mekies",
+        drivers: ["Iscak Hadjar", "Liam Lawson"],
+        principal: "Alan Permane",
         engine: "Honda RBPT",
-        car: "VCARB 01",
-        colors: "#2B2D42",
+        car: "VCARB 02",
+        colors: "#6C98FF",
         specs: ["Turbo-Hybrid V6", "Sister Team to Red Bull", "Top Speed: 344 km/h"]
     },
     haas: {
         name: "Haas F1 Team",
-        drivers: ["Nico Hülkenberg", "Kevin Magnussen"],
+        drivers: ["Esteban Ocon", "Oliver Bearman"],
         principal: "Ayao Komatsu",
         engine: "Ferrari PU",
         car: "VF-25",
-        colors: "#B7B7B7",
+        colors: "#9C9FA2",
         specs: ["Turbo-Hybrid V6", "Budget Aero", "Top Speed: 340 km/h"]
     },
     williams: {
         name: "Williams Racing",
-        drivers: ["Alex Albon", "Logan Sargeant"],
+        drivers: ["Alexander Albon", "Carlos Sainz"],
         principal: "James Vowles",
         engine: "Mercedes PU",
         car: "FW47",
-        colors: "#005AFF",
+        colors: "#1868DB",
         specs: ["Turbo-Hybrid V6", "Blue Aero Package", "Top Speed: 346 km/h"]
     },
     sauber: {
         name: "Kick Sauber",
-        drivers: ["Valtteri Bottas", "Zhou Guanyu"],
-        principal: "Andreas Seidl",
+        drivers: ["Nico Hulkenberg", "Gabriel Bortoleto"],
+        principal: "Jonathan Wheatley",
         engine: "Ferrari PU",
         car: "C45",
-        colors: "#00FF9D",
+        colors: "#01C00E",
         specs: ["Turbo-Hybrid V6", "Green/Black Livery", "Top Speed: 343 km/h"]
     },
     alpine: {
         name: "Alpine F1 Team",
-        drivers: ["Pierre Gasly", "Esteban Ocon"],
-        principal: "Bruno Famin",
+        drivers: ["Pierre Gasly", "Franco Colapinto"],
+        principal: "Flavio Briatore",
         engine: "Renault E-Tech",
         car: "A525",
-        colors: "#0090FF",
+        colors: "#00A1E8",
         specs: ["Turbo-Hybrid V6", "French Aero", "Top Speed: 345 km/h"]
     }
   };
