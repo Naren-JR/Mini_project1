@@ -221,7 +221,6 @@ a{
     margin: 25px 0px 10px 50px;
     height: calc(100vh - 160px);
     border-radius: 50px;
-    position: sticky;
     top: 130px;
     position: relative; 
     overflow: hidden;
@@ -332,18 +331,18 @@ a{
 
 
 
-#stats{
+
+ #stats{
     position: absolute;
     inset: 0;
 
     background-color: #373747;
     border-radius: 50px;
 
-    display: grid;
-    grid-template-rows: min-content auto;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
 
     font-family: "Audiowide";
 
@@ -355,23 +354,21 @@ a{
                 transform 0.35s ease;
 }
 
-
-
-
-
 #stats>p {
     font-family: "Audiowide";
-   margin: 20px 0;
+   margin: 25px;
     font-size: 25px;
 }
 
 #seasonBox{
     display: grid;
-    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    place-items: center;
+    grid-template-rows: auto auto;
+    gap: 30px;
+
+    margin: 25px;
 }
+
 
 #sPos{
     grid-row: 1;
