@@ -109,69 +109,79 @@ footer{
 }
 
 /* =======================
-   RACES PAGE
+   RACES PAGE STYLING
 ======================= */
 
-.races-layout {
+.races-page {
+    padding: 30px 20px;
+}
+
+.page-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-left: 5px solid #ff1e00;
+    padding-left: 12px;
+}
+
+.races-content {
     display: grid;
     grid-template-columns: 1fr 2.5fr;
     gap: 30px;
-    padding: 20px;
 }
 
 /* LEFT PANEL */
-.track-selector {
+.circuits-panel {
     background: rgba(255,255,255,0.04);
     border: 2px solid #ff1e00;
     border-radius: 14px;
     padding: 20px;
 }
 
-.track-selector h2 {
+.circuits-panel h2 {
     margin-bottom: 15px;
 }
 
-.track-buttons {
+.circuit-buttons {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
-.track-buttons button {
-    padding: 10px 14px;
+.circuit-buttons button {
+    padding: 10px 16px;
+    font-family: "Racing Sans One";
     background: #111;
     color: white;
     border: 1px solid #444;
     border-radius: 8px;
     cursor: pointer;
-    font-family: "Racing Sans One";
     transition: 0.25s ease;
 }
 
-.track-buttons button:hover,
-.track-buttons button.active {
+.circuit-buttons button:hover,
+.circuit-buttons button.active {
     background: #ff1e00;
     border-color: #ff1e00;
 }
 
-/* RIGHT PANEL */
-.track-display {
+/* RIGHT DISPLAY */
+.circuit-display {
     background: rgba(0,0,0,0.35);
     border: 2px solid #ff1e00;
     border-radius: 16px;
     padding: 20px;
 }
 
-.track-image {
+.circuit-image {
     width: 100%;
     max-width: 520px;
     margin: 20px 0;
     opacity: 0;
-    transform: scale(0.97);
-    transition: 0.6s ease;
+    transform: scale(0.95);
+    transition: 0.5s ease;
 }
 
-.track-image.show {
+.circuit-image.show {
     opacity: 1;
     transform: scale(1);
     filter:
@@ -179,19 +189,21 @@ footer{
         drop-shadow(0 0 30px rgba(255,30,0,0.4));
 }
 
-.track-info {
-    background: rgba(0,0,0,0.4);
+.circuit-info {
+    background: rgba(0,0,0,0.45);
     padding: 15px;
     border-left: 4px solid #ff1e00;
 }
 
-.track-info p {
+.circuit-info p {
     margin: 6px 0;
 }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-    .races-layout {
+    .races-content {
         grid-template-columns: 1fr;
     }
 }
+
+
