@@ -17,7 +17,7 @@
 })();
 
 /*data*/
-const TRACKS = {
+const CIRCUITS = {
     monza: {
         name: "Autodromo Nazionale di Monza",
         country: "Italy",
@@ -76,10 +76,10 @@ const TRACKS = {
     }
 };
 
-const buttons = document.querySelectorAll(".track-buttons button");
-const nameEl = document.getElementById("trackName");
-const imgEl = document.getElementById("trackImage");
-const infoEl = document.getElementById("trackInfo");
+const buttons = document.querySelectorAll(".circuit-buttons button");
+const nameEl = document.getElementById("circuitName");
+const imgEl = document.getElementById("circuitImage");
+const infoEl = document.getElementById("circuitInfo");
 
 buttons.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -87,7 +87,8 @@ buttons.forEach(btn => {
         buttons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
 
-        const data = TRACKS[btn.dataset.track];
+        const data = CIRCUITS[btn.dataset.track];
+        if (!data) return;
 
         nameEl.textContent = data.name;
 
