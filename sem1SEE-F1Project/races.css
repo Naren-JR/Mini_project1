@@ -166,7 +166,7 @@ footer{
 
 /* RIGHT DISPLAY */
 .circuit-display {
-    background: rgba(245,245,245,0.18);
+    background: rgba(255,255,255,0.22);
     border: 2px solid #ff1e00;
     border-radius: 16px;
     padding: 20px;
