@@ -220,7 +220,7 @@ a{
     margin: 25px 0px 10px 50px;
     width: auto;
     height: calc(100vh - 160px);
-
+    background-color: transparent;
     border-radius: 50px;
     position: sticky;
     top: 130px;
@@ -338,13 +338,12 @@ a{
      transition: opacity 0.35s ease 0.1s,
                 transform 0.35s ease 0.1s;
 }
-
-  #statsBox:hover #stats{
+  #title:hover + #stats,
+#stats:hover {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
-
 
 #stats>p {
     margin: 25px 0px 10px 25px;
