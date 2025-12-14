@@ -276,7 +276,7 @@ a{
 
 .fN{
     font-family: "Ms Madi";
-    font-size: 50px;
+    font-size: 60px;
 }
 
 .lN{
@@ -293,6 +293,7 @@ a{
     padding: 10px 0px 10px 0px;
 
     font-family: "Titillium Web";
+    font-size: 20px;
 }
 
 #info p{
