@@ -27,54 +27,42 @@
 <div id="main">
     <div class="races-layout">
 
-    <!-- LEFT: CIRCUIT LIST -->
-    <aside class="race-list">
+    <!-- LEFT: TRACK BUTTONS -->
+    <aside class="track-selector">
         <h2>F1 Circuits</h2>
-        <ul id="circuitList">
-            <li data-key="monza">Monza</li>
-            <li data-key="silverstone">Silverstone</li>
-            <li data-key="spa">Spa-Francorchamps</li>
-            <li data-key="monaco">Monaco</li>
-            <li data-key="suzuka">Suzuka</li>
-            <li data-key="interlagos">Interlagos</li>
-            <li data-key="melbourne">Melbourne</li>
-            <li data-key="bahrain">Bahrain</li>
-        </ul>
+
+        <div class="track-buttons">
+            <button data-track="monza">Monza</button>
+            <button data-track="silverstone">Silverstone</button>
+            <button data-track="spa">Spa</button>
+            <button data-track="monaco">Monaco</button>
+            <button data-track="suzuka">Suzuka</button>
+            <button data-track="interlagos">Interlagos</button>
+            <button data-track="melbourne">Melbourne</button>
+            <button data-track="bahrain">Bahrain</button>
+        </div>
     </aside>
 
-    <!-- RIGHT: DETAILS -->
-    <section class="race-details">
+    <!-- RIGHT: TRACK DETAILS -->
+    <section class="track-display">
 
         <h2 id="trackName">Select a Circuit</h2>
 
-        <img id="trackImg" class="track-image"
-             src=""
-             alt="F1 Track Layout">
+        <img
+            id="trackImage"
+            class="track-image"
+            src=""
+            alt="F1 Track Layout"
+        >
 
-        <!-- MAP -->
-        <div class="map-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg">
-            <div id="mapPin"></div>
-        </div>
-
-        <!-- STATS -->
-        <div class="track-stats" id="trackStats">
-            <p>Select a circuit to view details.</p>
-        </div>
-
-        <!-- WEEKEND FORMAT -->
-        <div class="schedule">
-            <h4>Race Weekend Format</h4>
-            <ul>
-                <li>Friday – Practice Sessions</li>
-                <li>Saturday – Qualifying</li>
-                <li>Sunday – Race</li>
-            </ul>
+        <div class="track-info" id="trackInfo">
+            <p>Click on a circuit to view track layout and race information.</p>
         </div>
 
     </section>
 
-  </div>
+</div>
+
 </div>
 
 
