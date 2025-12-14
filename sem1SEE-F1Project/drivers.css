@@ -217,33 +217,33 @@ a{
 #statsBox{
     grid-column: 3;
     grid-row: 1 / span 10;
+
     margin: 25px 0px 10px 50px;
-    width: auto;
     height: calc(100vh - 160px);
-    background-color: transparent;
+
     border-radius: 50px;
     position: sticky;
     top: 130px;
 
-    display: grid;
-    grid-template-rows: auto 1fr;
-    overflow: hidden;  
-    cursor: pointer;  
+    overflow: hidden;
 }
+  #statsBox:hover #stats{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+
 
 
 #title{
-    grid-row: 1;
-
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    background-image: linear-gradient(180deg,rgba(163, 79, 0, 1) 0%, rgb(255, 123, 0) 50%);
-
+    height: 55%;
+    background-image: linear-gradient(180deg,rgba(163,79,0,1) 0%, rgb(255,123,0) 50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto auto;
-    overflow: hidden;
 }
+
 
 #title p {
     margin: 0;
@@ -311,39 +311,37 @@ a{
 }
 
 #title-img img{
-    width: 90%;
-
-    justify-items: center;
-
-    object-fit: cover;
-    transform: translateY(50px);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: none;
 }
+
 
 
 
 
 #stats{
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+
     background-color: #373747;
 
-    display: grid;
-    grid-template-rows: min-content auto;
-
     font-family: "Audiowide";
+
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(100%);
     pointer-events: none;
 
-     transition: opacity 0.35s ease 0.1s,
-                transform 0.35s ease 0.1s;
+    transition: opacity 0.35s ease,
+                transform 0.35s ease;
 }
+
   #title:hover + #stats,
-#stats:hover {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
+
 
 #stats>p {
     margin: 25px 0px 10px 25px;
