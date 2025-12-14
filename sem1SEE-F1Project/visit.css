@@ -15,6 +15,24 @@
   font-style: normal;
 }
 
+.orbitron-regular {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.ms-madi-regular {
+  font-family: "Ms Madi", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.audiowide-regular {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body{
     display: flex;
     flex-direction: column;
@@ -96,6 +114,7 @@ fieldset {
 }
 
 legend {
+    font-family: "Orbitron";
     font-size: 25px;
     font-weight: normal;
     color: #ff1e00;

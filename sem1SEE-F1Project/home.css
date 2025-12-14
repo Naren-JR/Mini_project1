@@ -10,6 +10,24 @@
   font-style: normal;
 }
 
+.orbitron-regular {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.ms-madi-regular {
+  font-family: "Ms Madi", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.audiowide-regular {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body{
     display: grid;
     grid-template-rows: auto auto auto;  /*Header      Content     Footer*/
@@ -134,6 +152,8 @@ footer{
     gap: 12px;
 
     align-items: center;
+
+    font-family: "Orbitron";
 }
 
 #champBox {
@@ -159,6 +179,8 @@ footer{
     list-style: none;
     padding: 0;
     margin-top: 12px;
+
+    font-family: "Audiowide";
 }
 .top-five li {
     display: flex;
@@ -244,6 +266,8 @@ footer{
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 0 20px #ff1e00;
+
+    font-family: "Titillium Web";
 }
 
 /* RESPONSIVE */
@@ -298,6 +322,7 @@ footer{
     padding: 18px;
     border-radius: 12px;
     transition: 0.4s ease;
+    font-family: "Titillium Web";
 }
 
 .team-card h3 {
