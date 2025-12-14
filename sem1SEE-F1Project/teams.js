@@ -13,6 +13,7 @@ for(i = 0; i < 5; i++){
 }
 
 let curCar = null;
+let click = null;
 cars = ["mclaren", "ferarri", "mercedes", "redbull", "aston", "racingbull", "williams", "alpine", "haas", "sauber"];
 
 function carClickOFF(car, bg){
@@ -34,6 +35,8 @@ function carClick(car, newBg, glow, bg){
         car.style.boxShadow = `0 0 25px ${glow}`;
 
         car.style.transform = "scale(1.1)";
+
+        console.log(car);
     } else {
             car.style.backgroundColor = bg;
             car.style.boxShadow = "";
@@ -44,18 +47,19 @@ function carClick(car, newBg, glow, bg){
 
 
 function carReset(curCar){
-    carList = document.getElementsByClassName("team-card");
+    if (!curCar) return;
 
-    let car;
+    let carList = document.getElementsByClassName("team-card");
+    let car = null;
 
-    for(i = 0; i < 10; i++){
-        
-        if(carList[i].classList[1] == curCar){
-            car = carList[i].id;
-            car = document.getElementById(car);
+    for (let i = 0; i < carList.length; i++){
+        if (carList[i].classList[1] === curCar){
+            car = carList[i];
             break;
         }
     }
+
+    if (!car) return;
 
     carClickOFF(car, car.style.backgroundColor.split("0.")[0]);
 }
@@ -66,7 +70,7 @@ function mclaren(){
 }
 
 function ferarri(){
-    carClick(document.getElementById("r1c2"), "#ED1131ed", "##ED1131", "#ED1131ba");
+    carClick(document.getElementById("r1c2"), "#ED1131ed", "#ED1131", "#ED1131ba");
 }
 
 function mercedes(){
@@ -98,11 +102,11 @@ function haas(){
 }
 
 function sauber(){
-    carClick(document.getElementById("r5c2"), "#01C00Eed", "##01C00E", "#01C00Eba");
+    carClick(document.getElementById("r5c2"), "#01C00Eed", "#01C00E", "#01C00Eba");
 }
 
 
-let click = null;
+
 document.addEventListener("click", function(e) {
     
     click = e.srcElement.classList[1];
@@ -111,7 +115,17 @@ document.addEventListener("click", function(e) {
         if (curCar == null) {
             curCar = e.srcElement.classList[1];
         } else if(click == curCar){
-            console.log("Changeing page to drivers");
+            if(curCar == "mclaren") window.open("https://www.mclaren.com/racing/formula-1/", "_blank");
+            else if(curCar == "ferarri") window.open("https://www.ferrari.com/en-EN/formula1", "_blank");
+            else if(curCar == "redbull") window.open("https://www.redbullracing.com/int-en", "_blank");
+            else if(curCar == "racingbull") window.open("https://www.visacashapprb.com/int-en", "_blank");
+            else if(curCar == "mercedes") window.open("https://www.mercedesamgf1.com/", "_blank");
+            else if(curCar == "aston") window.open("https://www.astonmartinf1.com/en-GB", "_blank");
+            else if(curCar == "williams") window.open("https://www.williamsf1.com/?srsltid=AfmBOoq78g_DUNEXf_ZoMWInyUodlSqcNt1XYhnjcfgLXNPWoDGv_LLR", "_blank");
+            else if(curCar == "alpine") window.open("https://www.alpinef1.com/", "_blank");
+            else if(curCar == "haas") window.open("https://www.haasf1team.com/", "_blank");
+            else if(curCar == "sauber") window.open("https://www.sauber-group.com/", "_blank");
+
         } else {
             carReset(curCar);
             curCar = click;
