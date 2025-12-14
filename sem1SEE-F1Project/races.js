@@ -65,14 +65,14 @@ const CIRCUITS = {
         country: "Australia",
         races: 26,
         lap: "1:20.235",
-        image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Albert_Park_Circuit_2021.svg"
+        image: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Circuit_Albert_Park.svg"
     },
     bahrain: {
         name: "Bahrain International Circuit",
         country: "Bahrain",
         races: 21,
         lap: "1:31.447",
-        image: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Bahrain_International_Circuit--Grand_Prix_Layout.svg"
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Circuit_Bahrain.svg"
     }
 };
 
