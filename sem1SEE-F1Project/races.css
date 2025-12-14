@@ -185,8 +185,7 @@ footer{
     opacity: 1;
     transform: scale(1);
     filter:
-        drop-shadow(0 0 12px rgba(255, 60, 60, 0.85));
-        drop-shadow(0 0 30px rgba(255,30,0,0.3));
+        drop-shadow(0 0 12px rgba(255, 60, 60, 0.85)) drop-shadow(0 0 30px rgba(255, 30, 0, 0.3));
 }
 
 .circuit-info {
