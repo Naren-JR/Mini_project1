@@ -25,43 +25,49 @@
     </nav>
 </header>
 <div id="main">
-    <div class="races-layout">
+<section class="races-page">
 
-    <!-- LEFT: TRACK BUTTONS -->
-    <aside class="track-selector">
-        <h2>F1 Circuits</h2>
+    <h1 class="page-title">F1 Circuits</h1>
 
-        <div class="track-buttons">
-            <button data-track="monza">Monza</button>
-            <button data-track="silverstone">Silverstone</button>
-            <button data-track="spa">Spa</button>
-            <button data-track="monaco">Monaco</button>
-            <button data-track="suzuka">Suzuka</button>
-            <button data-track="interlagos">Interlagos</button>
-            <button data-track="melbourne">Melbourne</button>
-            <button data-track="bahrain">Bahrain</button>
-        </div>
-    </aside>
+    <div class="races-content">
 
-    <!-- RIGHT: TRACK DETAILS -->
-    <section class="track-display">
+        <!-- LEFT: CIRCUIT BUTTONS -->
+        <div class="circuits-panel">
+            <h2>Select a Circuit</h2>
 
-        <h2 id="trackName">Select a Circuit</h2>
-
-        <img
-            id="trackImage"
-            class="track-image"
-            src=""
-            alt="F1 Track Layout"
-        >
-
-        <div class="track-info" id="trackInfo">
-            <p>Click on a circuit to view track layout and race information.</p>
+            <div class="circuit-buttons">
+                <button data-track="monza">Monza</button>
+                <button data-track="silverstone">Silverstone</button>
+                <button data-track="spa">Spa</button>
+                <button data-track="monaco">Monaco</button>
+                <button data-track="suzuka">Suzuka</button>
+                <button data-track="interlagos">Interlagos</button>
+                <button data-track="melbourne">Melbourne</button>
+                <button data-track="bahrain">Bahrain</button>
+            </div>
         </div>
 
-    </section>
+        <!-- RIGHT: DISPLAY -->
+        <div class="circuit-display">
 
-</div>
+            <h2 id="circuitName">Select a Circuit</h2>
+
+            <img
+                id="circuitImage"
+                class="circuit-image"
+                alt="F1 Circuit Layout"
+            >
+
+            <div id="circuitInfo" class="circuit-info">
+                <p>Click on a circuit to view track layout and race information.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 </div>
 
