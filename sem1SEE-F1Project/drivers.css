@@ -40,6 +40,8 @@ body{
     font-family: "Racing Sans One";
     background-color: #15151E;
     color: white;
+
+    cursor: url("softCur.png"), auto;
 }
 
 header{
