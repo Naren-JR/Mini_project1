@@ -110,7 +110,7 @@ function sauber(){
 document.addEventListener("click", function(e) {
     
     click = e.srcElement.classList[1];
-    
+    console.log(e);
     if(cars.includes(click)){
         if (curCar == null) {
             curCar = e.srcElement.classList[1];
