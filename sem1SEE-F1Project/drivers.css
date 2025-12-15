@@ -31,7 +31,7 @@
 body{
     display: grid;
     grid-template-rows: auto auto auto;  /*Header      Content     Footer*/
-    
+    cursor: crosshair;
     min-height: 100vh;
     overflow-y: auto;
     margin: 0px;
@@ -82,7 +82,7 @@ nav{
     justify-content: space-evenly;
     align-items: center;
     gap: 50px;
-
+    cursor: crosshair;;
     margin: 0px auto 0px auto;
 }
 
@@ -184,6 +184,7 @@ a{
     gap: 20px;
     max-height: calc(100vh - 160px);
     overflow-y: auto;
+    cursor: url("astonmartinLogo.png")16 16, auto
 }
 
 .mclaren { background-image: linear-gradient(125deg,rgba(163, 79, 0, 1) 10%, rgba(244, 118, 0, 1) 50%); }
