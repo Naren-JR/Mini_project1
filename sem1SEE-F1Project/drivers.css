@@ -40,8 +40,6 @@ body{
     font-family: "Racing Sans One";
     background-color: #15151E;
     color: white;
-
-    cursor: url("softCur.png"), auto;
 }
 
 header{
@@ -184,7 +182,6 @@ a{
     gap: 20px;
     max-height: calc(100vh - 160px);
     overflow-y: auto;
-    cursor: url("astonmartinLogo.png")16 16, auto
 }
 
 .mclaren { background-image: linear-gradient(125deg,rgba(163, 79, 0, 1) 10%, rgba(244, 118, 0, 1) 50%); }
@@ -196,6 +193,7 @@ a{
 .redbull {background-image: linear-gradient(125deg,rgba(0, 59, 148, 1) 10%, rgba(71, 129, 215, 1) 50%);}
 
 .aston {background-image: linear-gradient(125deg,rgba(0, 117, 78, 1) 10%, rgba(41, 207, 151, 1) 50%);}
+
 .racingbull {background-image: linear-gradient(125deg,rgba(56, 78, 130, 1) 10%, rgba(108, 152, 255, 1) 50%);}
 
 .williams {background-image: linear-gradient(125deg,rgba(15, 60, 122, 1) 10%, rgba(18, 115, 252, 1) 50%);}
