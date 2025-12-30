@@ -308,20 +308,71 @@ function playBurnout() {
     requestAnimationFrame(updateTelemetry);
   });
 
+  function stopAudio() {
+    if (!audioCtx) return;
+
+    try {
+      osc.stop();
+      noiseGen.stop();
+    } catch (e) {}
+
+    osc.disconnect();
+    noiseGen.disconnect();
+    filter.disconnect();
+    noiseGain.disconnect();
+    master.disconnect();
+
+    audioCtx.close();
+
+    audioCtx = null;
+    osc = filter = noiseGen = noiseGain = master = null;
+  }
+
   stopBtn.addEventListener("click", () => {
     engineRunning = false;
+    stopwatchRunning = false;
+
     stopBtn.disabled = true;
     startBtn.disabled = false;
-    if (master) master.gain.setTargetAtTime(0.001, audioCtx.currentTime, 0.3);
-    stopwatchRunning = false;
+
+    stopAudio();
   });
 
+  function resetArc() {
+    const sweep = document.getElementById("arcSweep");
+    const base  = document.getElementById("arcBase");
+    const fill  = document.getElementById("arcFill");
+
+    // reset visuals
+    sweep.style.opacity = "0";
+    sweep.style.animation = "none";
+    sweep.style.strokeDashoffset = "260";
+
+    base.style.stroke = "#222222";
+
+    fill.style.strokeDashoffset = "260";
+  }
+
+
   resetBtn.addEventListener("click", () => {
-    speed = 0; rpm = 0; gear = "N";
-    speedEl.textContent = 0; rpmEl.textContent = 0; gearEl.textContent = "N";
-    smoothedThrottle = 0;
+    engineRunning = false;
     stopwatchRunning = false;
+
+    speed = 0;
+    rpm = 0;
+    gear = "N";
+    smoothedThrottle = 0;
+
+    speedEl.textContent = 0;
+    rpmEl.textContent = 0;
+    gearEl.textContent = "N";
     $("#stopwatch").textContent = "00:00.00";
+
+    stopAudio();
+    resetArc();
+
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
   });
 
   // initialize audio nodes variables used above
