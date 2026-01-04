@@ -17,10 +17,7 @@ for (let i = 0; i < Math.min(links.length, 5); i++) {
   } catch (e) { /* ignore missing items */ }
 }
 
-/* ===========================================================
-   TELEMETRY ENGINE — ARC (static) + DIGITAL SPEED
-   Smooth throttle, RPM mapping, engine + gearshift sounds
-   =========================================================== */
+
 (function () {
   const $ = s => document.querySelector(s);
 
@@ -40,15 +37,15 @@ for (let i = 0; i < Math.min(links.length, 5); i++) {
   const resetBtn = $("#resetBtn");
 
   /* engine state */
-  let speed = 0;            // km/h
+  let speed = 0;    // km/h
   let rpm = 0;
   let gear = "N";
   let engineRunning = false;
   let lastFrame = null;
 
-  const MAX_SPEED = 400;    // limit
+  const MAX_SPEED = 400;   
 
-  /* team performance (simple tuning knobs) */
+  /* team performance  */
   const TEAMS = {
     mclaren:  { torque: 1.05, gears: 8 },
     redbull:  { torque: 1.25, gears: 8 },
@@ -59,11 +56,10 @@ for (let i = 0; i < Math.min(links.length, 5); i++) {
   /* audio presets */
   const PRESETS = {
     standard: { base: 100, noise: 0.25, q: 6 },
-    v8:       { base: 70, noise: 0.45, q: 8 },
-    v6:       { base: 120, noise: 0.2, q: 5 },
+    v8: { base: 70, noise: 0.45, q: 8 },
+    v6:{ base: 120, noise: 0.2, q: 5 },
     electric: { base: 260, noise: 0.02, q: 2 }
   };
-
   const RAMP = { gentle: 0.45, normal: 0.85, fast: 1.6 };
   const TIMING = { relaxed: 0.6, standard: 1.0, aggressive: 1.6 };
 
@@ -73,14 +69,11 @@ for (let i = 0; i < Math.min(links.length, 5); i++) {
 function playGearshift() {
     if (!audioCtx) return;
 
-    /* --------------------------------------------------------
-       GEARSHIFT SOUND = 3 PARTS
-       1) "Tut"      → quick mechanical click
-       2) "Thump"    → gearbox impact
-       3) "Crack + Pshhh" → exhaust backfire + wastegate
-       -------------------------------------------------------- */
+    /* GEARSHIFT SOUND : "Tut"  
+       Thump  
+       Crack + Pshhh */
 
-    // 1) Tut — short square click
+    // Tut — short square wave, amp is low
     const tutOsc = audioCtx.createOscillator();
     const tutGain = audioCtx.createGain();
     tutOsc.type = "square";
@@ -91,7 +84,7 @@ function playGearshift() {
     tutOsc.start();
     tutOsc.stop(audioCtx.currentTime + 0.06);
 
-    // 2) Thump — low sine punch
+    //Thump — low amp, sine wave
     const thumpOsc = audioCtx.createOscillator();
     const thumpGain = audioCtx.createGain();
     thumpOsc.type = "sine";
@@ -102,33 +95,23 @@ function playGearshift() {
     thumpOsc.start();
     thumpOsc.stop(audioCtx.currentTime + 0.16);
 
-    // 3) Crack + Pshhh — white noise burst
+    // Crack — white noise, explode
     const crackBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.18, audioCtx.sampleRate);
     const crack = crackBuffer.getChannelData(0);
-
-    // Create white noise with fading envelope
     for (let i = 0; i < crack.length; i++) {
         crack[i] = (Math.random() * 2 - 1) * (1 - i / crack.length);
     }
-
     const crackSource = audioCtx.createBufferSource();
     crackSource.buffer = crackBuffer;
-
     const crackGain = audioCtx.createGain();
     crackGain.gain.value = 1.5;
     crackGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
-
     crackSource.connect(crackGain).connect(audioCtx.destination);
     crackSource.start();
 }
 
-   
-  /* -------------------------
-     SOUND: burnout (tyre screech)
-     ------------------------- */
 function playBurnout() {
     if (!audioCtx) return;
-
     const len = audioCtx.sampleRate * 0.5; // 0.5 seconds
     const buffer = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
     const data = buffer.getChannelData(0);
@@ -138,14 +121,11 @@ function playBurnout() {
         const fade = 1 - i / len;
         data[i] = (Math.random() * 2 - 1) * fade * 1.4;
     }
-
     const src = audioCtx.createBufferSource();
     src.buffer = buffer;
-
     const gain = audioCtx.createGain();
     gain.gain.value = 1.4;
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
-
     src.connect(gain).connect(audioCtx.destination);
     src.start();
 }
@@ -154,24 +134,19 @@ function playBurnout() {
   function initAudio() {
     if (audioCtx) return;
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
     osc = audioCtx.createOscillator();
     osc.type = "sawtooth";
-
     filter = audioCtx.createBiquadFilter();
     filter.type = "lowpass";
 
     const noiseBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 2, audioCtx.sampleRate);
     const out = noiseBuffer.getChannelData(0);
     for (let i = 0; i < out.length; i++) out[i] = (Math.random() * 2 - 1) * 0.5;
-
     noiseGen = audioCtx.createBufferSource();
     noiseGen.buffer = noiseBuffer;
     noiseGen.loop = true;
-
     noiseGain = audioCtx.createGain();
     master = audioCtx.createGain();
-
     noiseGen.connect(noiseGain);
     osc.connect(filter);
     filter.connect(master);
@@ -186,21 +161,16 @@ function playBurnout() {
     const arcFill = document.getElementById("arcFill");
     const percent = Math.min(speed / MAX_SPEED, 1);
     const offset = 260 - (260 * percent);   // 260 = arc length
-
     arcFill.style.strokeDashoffset = offset;
 }
-
-  /* helpers: speed->rpm and rpm->freq */
+  /* helpers: speed tgo rpm and rpm to freq */
   function speedToRPM(s) { return Math.round((s / MAX_SPEED) * 14000); }
   function rpmToFreq(rpm, presetName) {
     const p = PRESETS[presetName] || PRESETS.standard;
     return p.base + (rpm / 14000) * (p.base * 6.5);
   }
-
-  /* smoothing helpers to avoid throttle jitter */
   let smoothedThrottle = 0;
-  const THROTTLE_SMOOTH = 0.12; // lower = snappier, higher = smoother
-
+  const THROTTLE_SMOOTH = 0.12
   /* main telemetry loop */
   function updateTelemetry(ts) {
     if (!lastFrame) lastFrame = ts;
@@ -210,11 +180,9 @@ function playBurnout() {
     // smooth throttle
     const rawThrottle = Number(throttle.value) / 100;
     smoothedThrottle += (rawThrottle - smoothedThrottle) * Math.min(1, THROTTLE_SMOOTH * (1 / Math.max(dt, 0.0001)));
-
     const team = TEAMS[teamSel.value] || TEAMS.mclaren;
     const ramp = RAMP[rampSel.value] || RAMP.normal;
     const timing = TIMING[timingSel.value] || TIMING.standard;
-
     const targetSpeed = smoothedThrottle * MAX_SPEED * timing;
     const accel = team.torque * ramp * (0.9 + smoothedThrottle * 0.5);
 
@@ -223,21 +191,16 @@ function playBurnout() {
     speed += diff * accel * dt;
     if (speed < 0.01) speed = 0;
 
-    // rpm mapping
     rpm = speedToRPM(speed);
 
-    // gear logic
     const gearCalc = Math.ceil((rpm / 14000) * team.gears);
     const newGear = speed < 5 ? "N" : Math.min(team.gears, Math.max(1, gearCalc));
-
     if (newGear !== gear) {
       // if we shifted up (not from N), play gearshift sequence
       if (gear !== "N") playGearshift();
       gear = newGear;
     }
    updateArcFill(speed);
-
-    // update UI
     speedEl.textContent = Math.round(speed);
     rpmEl.textContent = rpm;
     gearEl.textContent = gear;
@@ -252,7 +215,6 @@ function playBurnout() {
       noiseGain.gain.setTargetAtTime(preset.noise * (0.2 + smoothedThrottle * 0.9), audioCtx.currentTime, 0.04);
       master.gain.setTargetAtTime(Math.min(1, 0.08 + smoothedThrottle * 0.9 + rpm / 22000), audioCtx.currentTime, 0.05);
     }
-
     if (engineRunning) requestAnimationFrame(updateTelemetry);
   }
 
@@ -271,19 +233,15 @@ function playBurnout() {
    function animateArcSweep() {
     const sweep = document.getElementById("arcSweep");
     const base  = document.getElementById("arcBase");
-
-    // Reset sweep
     sweep.style.opacity = "1";
     sweep.style.strokeDashoffset = "260";
     sweep.style.animation = "arcSweepAnim 0.8s ease-out forwards";
 
-    // After sweep → turn arcBase gray & hide sweep
     setTimeout(() => {
         sweep.style.opacity = "0";
         base.style.stroke = "#555";
     }, 850);
 }
-
 
   /* buttons */
   startBtn.addEventListener("click", () => {
@@ -295,20 +253,16 @@ function playBurnout() {
     startBtn.disabled = true;
     stopBtn.disabled = false;
 
-    // burnout if throttle already high
     if (Number(throttle.value) >= 30) playBurnout();
-
     stopwatchRunning = true;
     stopwatchStart = performance.now();
     requestAnimationFrame(updateStopwatch);
-
     lastFrame = null;
     requestAnimationFrame(updateTelemetry);
   });
 
   function stopAudio() {
     if (!audioCtx) return;
-
     try {
       osc.stop();
       noiseGen.stop();
@@ -319,9 +273,7 @@ function playBurnout() {
     filter.disconnect();
     noiseGain.disconnect();
     master.disconnect();
-
     audioCtx.close();
-
     audioCtx = null;
     osc = filter = noiseGen = noiseGain = master = null;
   }
@@ -329,10 +281,8 @@ function playBurnout() {
   stopBtn.addEventListener("click", () => {
     engineRunning = false;
     stopwatchRunning = false;
-
     stopBtn.disabled = true;
     startBtn.disabled = false;
-
     stopAudio();
   });
 
@@ -340,49 +290,37 @@ function playBurnout() {
     const sweep = document.getElementById("arcSweep");
     const base  = document.getElementById("arcBase");
     const fill  = document.getElementById("arcFill");
-
     // reset visuals
     sweep.style.opacity = "0";
     sweep.style.animation = "none";
     sweep.style.strokeDashoffset = "260";
-
     base.style.stroke = "#222222";
-
     fill.style.strokeDashoffset = "260";
   }
-
 
   resetBtn.addEventListener("click", () => {
     engineRunning = false;
     stopwatchRunning = false;
-
     speed = 0;
     rpm = 0;
     gear = "N";
     smoothedThrottle = 0;
-
     speedEl.textContent = 0;
     rpmEl.textContent = 0;
     gearEl.textContent = "N";
     $("#stopwatch").textContent = "00:00.00";
-
     stopAudio();
     resetArc();
 
     startBtn.disabled = false;
     stopBtn.disabled = true;
   });
-
+})(); 
   // initialize audio nodes variables used above
   // (we need noiseGain reference; created in initAudio)
-  // note: initAudio lazy-creates nodes when user starts engine
+  // initAudio lazy-creates nodes when user starts engine
 
-})(); /* end telemetry IIFE */
-
-/* ===========================================================
-   TEAM INFO PANEL — buttons + card update
-   (keeps same behavior; highlights active)
-   =========================================================== */
+/* TEAM INFO PANEL */
 (function teamPanel(){
   const TEAM_DATA = {
     redbull: {
@@ -502,4 +440,5 @@ function playBurnout() {
     });
   });
 
-})(); /* end team panel */
+})(); 
+/*complete in 2 days*/
