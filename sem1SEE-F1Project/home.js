@@ -17,7 +17,10 @@ for (let i = 0; i < Math.min(links.length, 5); i++) {
   } catch (e) { /* ignore missing items */ }
 }
 
-
+/* ===========================================================
+   TELEMETRY ENGINE — ARC (static) + DIGITAL SPEED
+   Smooth throttle, RPM mapping, engine + gearshift sounds
+   =========================================================== */
 (function () {
   const $ = s => document.querySelector(s);
 
