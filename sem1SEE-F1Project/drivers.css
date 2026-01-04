@@ -31,7 +31,6 @@
 body{
     display: grid;
     grid-template-rows: auto auto auto;  /*Header      Content     Footer*/
-    cursor: crosshair;
     min-height: 100vh;
     overflow-y: auto;
     margin: 0px;
