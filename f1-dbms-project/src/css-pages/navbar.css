@@ -1,0 +1,42 @@
+body {
+    border-bottom: solid 1px #535376;
+}
+
+.navbar {
+    margin: 20px 50px 20px 50px;
+
+    display: flex;
+    align-items: center;
+}
+
+.brand {
+    justify-content: left;
+    align-self: center;
+}
+
+.links {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.link {
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 20px 12px 20px;
+    border-bottom: solid 1px transparent;
+}
+
+.link:hover {
+    border-bottom-color: white;
+}

@@ -1,14 +1,20 @@
+import { Routes, Route } from "react-router-dom";
+
+import Home from './pages/Home'
+import Navbar from './components/Navbar'
+import NxtRace from './components/NxtRace'
+
 import './App.css'
 
 function App() {
 
-	const testBut = () => {
-		alert("Test")
-	}
-
 	return (
 		<>
-			<button onClick={testBut}>test</button>
+			<Navbar />
+			<NxtRace />
+			<Routes>
+				<Route path="/" element={<Home />} />
+			</Routes>
 		</>
 	)
 }
