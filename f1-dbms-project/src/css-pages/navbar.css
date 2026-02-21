@@ -1,9 +1,5 @@
 body {
     border-bottom: solid 1px #535376;
-}
-
-.navbar {
-    margin: 20px 50px 20px 50px;
 
     display: flex;
     align-items: center;
