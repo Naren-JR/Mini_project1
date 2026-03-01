@@ -54,7 +54,7 @@ function Home() {
                         </div>
 
                         <div className="driver-meta">
-                            McLaren &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 423pts
+                            423 pts • McLaren
                         </div>
                     </div>
                     <img src="https://media.formula1.com/image/upload/c_fill,w_720/q_auto/v1740000000/common/f1/2025/mclaren/lannor01/2025mclarenlannor01right.webp" alt="Driver Champion" className='dcright' />
