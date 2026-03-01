@@ -1,0 +1,183 @@
+.news-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    padding: 40px;
+
+}
+
+.news-headline {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    height: 430px;
+    cursor: pointer;
+}
+
+.news-headline img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* dark gradient overlay */
+.news-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 30px;
+
+    background: linear-gradient(transparent,
+            rgba(0, 0, 0, 0.85));
+}
+
+.news-overlay h2 {
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.news-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.news-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 12px;
+    border-radius: 12px;
+
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    transition: 0.25s ease;
+    cursor: pointer;
+}
+
+.news-card:hover {
+    background: #111;
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(255, 30, 0, 0.3);
+}
+
+.news-card img {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.news-card p {
+    color: white;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+
+
+
+
+
+
+.champions-section {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.champion-card {
+    flex: 1 1 50%;
+    position: relative;
+    min-height: 22vw;
+    padding: 2vw;
+    border-radius: 1.2vw;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.driver-champion {
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    background-image: linear-gradient(125deg, rgba(163, 79, 0, 1) 10%, rgba(244, 118, 0, 1) 50%);
+}
+
+.driver-champion .dcleft {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: stretch;
+}
+
+/* Position text (1st) */
+.driver-champion .pos-season {
+    font-size: 2vw;
+    font-weight: bold;
+    margin-bottom: 1vw;
+
+    align-self: top;
+}
+
+
+/* Name scaling */
+.driver-champion .driver-first {
+    font-size: 3vw;
+    display: block;
+}
+
+.driver-champion .driver-last {
+    font-size: 4.5vw;
+    font-weight: bold;
+    line-height: 0.9;
+}
+
+
+/* Meta */
+.driver-champion .driver-meta {
+    font-size: 1.6vw;
+    margin-top: 2vw;
+}
+
+
+/* Driver Image */
+.driver-champion img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+
+/* =========================
+   CONSTRUCTOR CHAMPION
+========================= */
+
+.constructor-champion {
+    background: #111;
+    /* you can replace with team gradient later */
+    border: 0.2vw solid #ff1e00;
+}
+
+
+/* Constructor scaling */
+.constructor-champion h3 {
+    font-size: 2.5vw;
+}
+
+.constructor-champion p {
+    font-size: 1.5vw;
+}

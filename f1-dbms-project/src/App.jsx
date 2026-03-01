@@ -11,7 +11,7 @@ function App() {
 	return (
 		<>
 			<Navbar />
-			<NxtRace />
+
 			<Routes>
 				<Route path="/" element={<Home />} />
 			</Routes>

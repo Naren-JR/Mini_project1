@@ -1,5 +1,8 @@
 .raceTime-container {
-    margin: 20px 50px 20px 50px;
+    margin: 10px 0px 10px 0px;
+    padding: 0px 50px 0px 50px;
+
+    border-bottom: solid 1px #535376;
 
     display: flex;
     align-items: center;
