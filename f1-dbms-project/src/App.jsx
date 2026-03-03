@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Home from './pages/Home'
+import Visit from './pages/Visit'
 import Navbar from './components/Navbar'
 import NxtRace from './components/NxtRace'
 
@@ -14,6 +15,7 @@ function App() {
 
 			<Routes>
 				<Route path="/" element={<Home />} />
+				<Route path="/Visit" element={<Visit />} />
 			</Routes>
 		</>
 	)
