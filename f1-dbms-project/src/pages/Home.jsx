@@ -45,31 +45,32 @@ function Home() {
 
             <section className="champions-section">
                 <div className="champion-card driver-champion">
+
+
+
+
                     <div className="dcleft">
-                        <div className="pos-season">1st • 2025 Season</div>
-
-                        <div className="driver-name">
-                            <span className="driver-first">Lando</span>
-                            <span className="driver-last">Norris</span>
-                        </div>
-
-                        <div className="driver-meta">
+                        <div className="pos-season">
+                            <h3>2025 Season - Drivers Champion</h3>
                             423 pts • McLaren
                         </div>
+                        <div className="driver-name">
+                            <span className="driver-first">Lando </span>
+                            <span className="driver-last"> Norris</span>
+                        </div>
+                        <div className="driver-gallery">
+                            <img src="https://images.ctfassets.net/gy95mqeyjg28/MxQWpWOMmWTDcS20YiJYz/8e1b7bd8296fd43ed84cc40fc02ad37e/mexico-desktop_0001_gettyimages-2243103994.jpg?w=1080&q=75&fm=webp" alt="" />
+                            <img src="https://images.ctfassets.net/gy95mqeyjg28/5FbTGT4oC8FHoCikv2miwk/213b5db5ea30ce40e3ede3e0c2307d98/mexico-pato-desktop.jpg?w=1080&q=75&fm=webp" alt="" />
+                        </div>
+
+
                     </div>
+
+
+
+
                     <img src="https://media.formula1.com/image/upload/c_fill,w_720/q_auto/v1740000000/common/f1/2025/mclaren/lannor01/2025mclarenlannor01right.webp" alt="Driver Champion" className='dcright' />
                 </div>
-
-                <div className="champion-card constructor-champion">
-                    <h2>Constructor Champion</h2>
-
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/66/McLaren_Racing_logo.svg/512px-McLaren_Racing_logo.svg.png" alt="Constructor Champion" />
-
-                    <h3>McLaren</h3>
-                    <p>Total Points: 750</p>
-                    <p>Season: 2025</p>
-                </div>
-
             </section>
 
 
